@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F8FAFC">
+<meta name="theme-color" content="#FAFAFC">
 <title>Nodara Soluções em TI</title>
 <meta name="description" content="Nodara Soluções em TI: infraestrutura, redes e segurança da informação para pequenas empresas e residências em Belo Horizonte. Também manutenção e upgrade de computadores.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,10 +11,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
 :root{
-  --bg:#F8FAFC; --white:#FFFFFF; --ink:#0F1729; --muted:#5B6678; --line:#E3E8EF;
-  --navy:#0F1729; --navy-2:#1C2537; --navy-line:#2C3648; --navy-muted:#A3ADBD;
-  --accent:#F59F0A; --accent-btn:#FBBD23; --accent-strong:#D97706; --accent-soft:#FEF3D7;
-  --ok:#16A34A; --warn:#F59F0A; --bad:#DC2626;
+  --bg:#FAFAFC; --white:#FFFFFF; --ink:#0B0A12; --muted:#5E5A70; --line:#E7E4EF;
+  --navy:#0B0A12; --navy-2:#17151F; --navy-line:#2A2736; --navy-muted:#A8A3BA;
+  --accent:#7C3AED; --accent-btn:#7C3AED; --accent-strong:#6D28D9; --accent-soft:#F1EBFE; --accent-light:#B79CFB; --accent-line:#D9C9FD;
+  --ok:#16A34A; --warn:#7C3AED; --bad:#DC2626;
   --shadow:0 1px 2px rgba(15,23,41,.05),0 18px 40px -20px rgba(15,23,41,.25);
   --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --radius:16px;
@@ -37,15 +37,15 @@ img{max-width:100%}
 
 /* Botões */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:inherit;font-weight:600;font-size:1.05rem;line-height:1.2;padding:1rem 1.75rem;border-radius:12px;border:0;text-decoration:none;cursor:pointer;transition:background-color .15s,transform .15s,box-shadow .15s}
-.btn-primary{background:var(--accent-btn);color:var(--ink);box-shadow:0 10px 24px -10px rgba(245,159,10,.7)}
-.btn-primary:hover{background:var(--accent);transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 24px -10px rgba(124,58,237,.65)}
+.btn-primary:hover{background:var(--accent-strong);transform:translateY(-1px)}
 .btn-link{background:none;color:var(--accent-strong);padding-inline:.5rem}
 .btn-link:hover{color:var(--ink)}
 .btn-sm{padding:.65rem 1.1rem;font-size:.92rem;border-radius:10px;box-shadow:none}
 .btn svg{width:18px;height:18px}
 
 /* Cabeçalho */
-.site-header{position:sticky;top:0;z-index:20;background:rgba(248,250,252,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(250,250,252,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .header-row{display:flex;align-items:center;gap:2rem;min-height:72px}
 .brand{display:flex;align-items:center;gap:.6rem;color:inherit;text-decoration:none;margin-right:auto}
 .brand svg{width:30px;height:30px;flex:none}
@@ -69,7 +69,7 @@ img{max-width:100%}
 }
 
 /* Hero com grade */
-.hero{position:relative;overflow:hidden;background-color:#F1F5FB;background-image:linear-gradient(rgba(15,23,41,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,41,.05) 1px,transparent 1px);background-size:40px 40px}
+.hero{position:relative;overflow:hidden;background-color:#F4F1FB;background-image:linear-gradient(rgba(76,29,149,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(76,29,149,.06) 1px,transparent 1px);background-size:40px 40px}
 .hero::after{content:"";position:absolute;inset:auto 0 0;height:120px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(2.5rem,5vw,4.5rem);align-items:center;padding-block:clamp(3.5rem,8vw,6.5rem) clamp(4rem,8vw,6rem)}
 @media (max-width:980px){.hero-grid{grid-template-columns:minmax(0,1fr)}}
@@ -97,20 +97,20 @@ img{max-width:100%}
 .checks label:hover{border-color:#CBD3DE}
 .checks input[type=checkbox]{appearance:none;margin:0;padding:0;width:22px;height:22px;transition:none;border:2px solid #CBD3DE;border-radius:6px;display:grid;place-items:center;cursor:pointer;background:#fff}
 .checks input:checked{background:var(--accent);border-color:var(--accent)}
-.checks input:checked::after{content:"";width:6px;height:11px;border:solid var(--ink);border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
-.checks label:has(input:checked){background:var(--accent-soft);border-color:#F8D58A}
+.checks input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.checks label:has(input:checked){background:var(--accent-soft);border-color:var(--accent-line)}
 .score{background:var(--navy);color:#fff;border-radius:14px;padding:1.15rem 1.25rem;display:grid;gap:.75rem}
 .score-top{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem}
 .score small{display:block;font-size:.78rem;color:var(--navy-muted);font-weight:500}
 .score-num{font-size:2.1rem;font-weight:800;letter-spacing:-.03em;line-height:1}
 .score-num em{font-style:normal;font-size:1rem;color:var(--navy-muted);font-weight:600}
 .badge{font-size:.78rem;font-weight:700;padding:.3rem .65rem;border-radius:999px;background:rgba(220,38,38,.18);color:#FCA5A5;white-space:nowrap}
-.badge.mid{background:rgba(245,159,10,.18);color:#FCD34D}
+.badge.mid{background:rgba(167,139,250,.2);color:#C4B5FD}
 .badge.good{background:rgba(22,163,74,.2);color:#86EFAC}
 .meter{height:8px;border-radius:999px;background:var(--navy-line);overflow:hidden}
-.meter b{display:block;height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width .35s ease}
+.meter b{display:block;height:100%;width:0;background:linear-gradient(90deg,#7C3AED,#A78BFA);border-radius:inherit;transition:width .35s ease}
 .score-foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--navy-muted)}
-.score-foot a{color:var(--accent-btn);font-weight:700;text-decoration:none}
+.score-foot a{color:var(--accent-light);font-weight:700;text-decoration:none}
 .score-foot a:hover{text-decoration:underline}
 
 /* Seções */
@@ -135,10 +135,11 @@ img{max-width:100%}
 @media (max-width:860px){.focus{grid-template-columns:minmax(0,1fr)}}
 .focus-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(1.6rem,3vw,2.25rem);display:grid;gap:1.1rem;align-content:start;min-width:0}
 .focus-card.dark{background:var(--navy);border-color:var(--navy);color:#fff}
-.focus-card.dark p,.focus-card.dark .list li{color:#D3D9E3}
+.focus-card.dark p,.focus-card.dark .list li{color:#D6D2E3}
+.focus-card.dark .list svg{color:var(--accent-light)}
 .focus-card > p{color:var(--muted)}
 .icon{width:52px;height:52px;border-radius:14px;background:var(--accent-soft);color:var(--accent-strong);display:grid;place-items:center;flex:none}
-.focus-card.dark .icon{background:rgba(251,189,35,.14);color:var(--accent-btn)}
+.focus-card.dark .icon{background:rgba(124,58,237,.22);color:var(--accent-light)}
 .icon svg{width:26px;height:26px}
 .list{list-style:none;margin:0;padding:0;display:grid;gap:.65rem;font-size:.97rem}
 .list li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:.65rem;line-height:1.5}
@@ -157,11 +158,11 @@ img{max-width:100%}
 /* Compromissos (bloco escuro) */
 .dark-band{background:var(--navy);color:#fff}
 .dark-band .head p{color:var(--navy-muted)}
-.dark-band .label{color:var(--accent-btn)}
+.dark-band .label{color:var(--accent-light)}
 .promises{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
 @media (max-width:900px){.promises{grid-template-columns:minmax(0,1fr)}}
 .promise{background:var(--navy-2);border:1px solid var(--navy-line);border-radius:var(--radius);padding:1.75rem;display:grid;gap:.75rem;align-content:start}
-.promise .icon{background:var(--accent-btn);color:var(--ink);border-radius:50%;width:46px;height:46px}
+.promise .icon{background:var(--accent);color:#fff;border-radius:50%;width:46px;height:46px}
 .promise .icon svg{width:22px;height:22px}
 .promise p{color:#C3CBD7;font-size:.97rem;line-height:1.65}
 
@@ -171,7 +172,7 @@ img{max-width:100%}
 .plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:2rem;display:grid;gap:1rem;align-content:start}
 .plan.featured{border:2px solid var(--accent-btn);box-shadow:var(--shadow)}
 .tag{justify-self:start;font-size:.75rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
-.featured .tag{background:var(--accent-soft);color:var(--accent-strong);border-color:#F8D58A}
+.featured .tag{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent-line)}
 .plan > p{color:var(--muted)}
 
 /* Preços */
@@ -227,7 +228,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 .wa-float{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;width:56px;height:56px;border-radius:50%;background:#1FAF5A;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(15,23,41,.45)}
 .wa-float svg{width:28px;height:28px}
 </style>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 25V7l18 18V7' fill='none' stroke='%230F1729' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='25' r='3.7' fill='%23F59F0A'/%3E%3Ccircle cx='7' cy='7' r='3.7' fill='%230F1729'/%3E%3Ccircle cx='25' cy='25' r='3.7' fill='%230F1729'/%3E%3Ccircle cx='25' cy='7' r='3.7' fill='%23F59F0A'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 25V7l18 18V7' fill='none' stroke='%230B0A12' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='25' r='3.7' fill='%237C3AED'/%3E%3Ccircle cx='7' cy='7' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='25' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='7' r='3.7' fill='%237C3AED'/%3E%3C/svg%3E">
 <meta property="og:title" content="Nodara Soluções em TI">
 <meta property="og:description" content="Infraestrutura, redes e segurança da informação para pequenas empresas e residências.">
 <meta property="og:type" content="website">
