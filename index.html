@@ -1,693 +1,787 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FAFAFC">
-<title>Nodara Soluções em TI</title>
-<meta name="description" content="Nodara Soluções em TI: infraestrutura, redes e segurança da informação para pequenas empresas e residências em Belo Horizonte. Também manutenção e upgrade de computadores.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nodara · Redes & Desenvolvimento</title>
+<meta name="description" content="Infraestrutura de rede, segurança da informação e desenvolvimento de software para pequenas empresas e residências em Belo Horizonte – MG.">
+<meta name="theme-color" content="#0B0A12">
+<meta property="og:title" content="Nodara · Redes & Desenvolvimento">
+<meta property="og:description" content="Rede estável, dados protegidos e sistemas que trabalham por você. Belo Horizonte – MG.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 25V7l18 18V7' fill='none' stroke='%230B0A12' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='25' r='3.7' fill='%235B21B6'/%3E%3Ccircle cx='7' cy='7' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='25' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='7' r='3.7' fill='%235B21B6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FAFAFC; --white:#FFFFFF; --ink:#0B0A12; --muted:#5E5A70; --line:#E7E4EF;
   --navy:#0B0A12; --navy-2:#17151F; --navy-line:#2A2736; --navy-muted:#A8A3BA;
-  --accent:#5B21B6; --accent-btn:#5B21B6; --accent-strong:#4C1D95; --accent-soft:#EEE8FA; --accent-light:#A78BFA; --accent-line:#D3C4F5;
-  --ok:#16A34A; --warn:#5B21B6; --bad:#DC2626;
+  --ok:#16A34A; --warn:#B45309; --bad:#DC2626;
   --shadow:0 1px 2px rgba(15,23,41,.05),0 18px 40px -20px rgba(15,23,41,.25);
   --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --radius:16px;
   color-scheme:light;
 }
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1180px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
-h1{font-size:clamp(2.4rem,1.5rem + 3.6vw,3.9rem)}
-h2{font-size:clamp(1.85rem,1.4rem + 1.6vw,2.6rem)}
-h3{font-size:1.15rem;letter-spacing:-.01em;font-weight:700;line-height:1.3}
-p{margin:0}
-a{color:var(--accent-strong)}
-:focus-visible{outline:2.5px solid var(--accent-strong);outline-offset:3px;border-radius:6px}
-img{max-width:100%}
-[hidden]{display:none!important}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+.container{width:min(1160px,100% - 40px);margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--accent-light);outline-offset:2px;border-radius:6px}
 
-/* Botões */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:inherit;font-weight:600;font-size:1.05rem;line-height:1.2;padding:1rem 1.75rem;border-radius:12px;border:0;text-decoration:none;cursor:pointer;transition:background-color .15s,transform .15s,box-shadow .15s}
-.btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 24px -10px rgba(91,33,182,.6)}
-.btn-primary:hover{background:var(--accent-strong);transform:translateY(-1px)}
-.btn-link{background:none;color:var(--accent-strong);padding-inline:.5rem}
-.btn-link:hover{color:var(--ink)}
-.btn-sm{padding:.65rem 1.1rem;font-size:.92rem;border-radius:10px;box-shadow:none}
-.btn svg{width:18px;height:18px}
+/* ---------- Seletor entre os sites ---------- */
+.site-switch{background:var(--navy);color:var(--navy-muted);font-size:13px}
+.site-switch .container{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.site-switch .label{font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.site-switch .label b{color:#fff}
+.switch{display:flex;gap:4px;background:var(--navy-2);border:1px solid var(--navy-line);border-radius:999px;padding:3px}
+.switch a{display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 14px;border-radius:999px;font-weight:600;white-space:nowrap;transition:background .2s,color .2s}
+.switch a:hover{color:#fff}
+.switch a[aria-current="page"]{background:#fff;color:var(--ink)}
+.switch .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.dot-infra{background:#8B5CF6}
+.dot-equip{background:#F97316}
+.switch .short{display:none}
 
-/* Cabeçalho */
-.site-header{position:sticky;top:0;z-index:20;background:rgba(250,250,252,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.header-row{display:flex;align-items:center;gap:2rem;min-height:72px}
-.brand{display:flex;align-items:center;gap:.6rem;color:inherit;text-decoration:none;margin-right:auto}
-.brand svg{width:30px;height:30px;flex:none}
-.brand .n-line{stroke:currentColor}
-.brand .n-node{fill:currentColor}
-.brand .n-accent{fill:var(--accent)}
-.brand-name{display:flex;flex-direction:column;line-height:1.05;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
-.brand-name small{font-size:.66rem;font-weight:600;letter-spacing:.08em;opacity:.65;text-transform:uppercase;margin-top:3px}
-.nav{display:flex;align-items:center;gap:1.75rem}
-.nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:.94rem}
-.nav a:hover{color:var(--ink)}
-.menu-btn{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
+/* ---------- Cabeçalho ---------- */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(250,250,252,.86);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:32px;height:32px}
+.brand-name{font-weight:800;font-size:19px;letter-spacing:-.02em;line-height:1.1}
+.brand-sub{font-size:10.5px;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;line-height:1.2}
+.main-nav{display:flex;align-items:center;gap:28px}
+.main-nav a{text-decoration:none;font-size:15px;font-weight:500;color:var(--muted);transition:color .2s}
+.main-nav a:hover{color:var(--ink)}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:#fff;align-items:center;justify-content:center}
 .menu-btn svg{width:20px;height:20px}
 .mobile-nav{display:none}
-@media (max-width:900px){
-  .nav,.header-cta{display:none}
-  .menu-btn{display:inline-flex}
-  .mobile-nav:not([hidden]){display:grid;gap:.25rem;padding-block:.5rem 1rem;border-top:1px solid var(--line)}
-  .mobile-nav a{padding:.7rem 0;color:var(--ink);text-decoration:none;font-weight:600}
-  .mobile-nav .btn{margin-top:.5rem}
-}
 
-/* Hero com grade */
-.hero{position:relative;overflow:hidden;background-color:#F4F1FB;background-image:linear-gradient(rgba(76,29,149,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(76,29,149,.06) 1px,transparent 1px);background-size:40px 40px}
-.hero::after{content:"";position:absolute;inset:auto 0 0;height:120px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(2.5rem,5vw,4.5rem);align-items:center;padding-block:clamp(3.5rem,8vw,6.5rem) clamp(4rem,8vw,6rem)}
-@media (max-width:980px){.hero-grid{grid-template-columns:minmax(0,1fr)}}
-.hero-copy{display:grid;gap:1.4rem;min-width:0}
-.hero h1 span{display:block;color:var(--accent)}
-.lede{font-size:1.2rem;color:var(--muted);max-width:50ch;line-height:1.65}
-.sublede{font-size:.95rem;color:var(--muted);max-width:56ch}
-.actions{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center;margin-top:.4rem}
-.stats{list-style:none;margin:.6rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.7rem 1.75rem;font-size:.92rem;font-weight:500;color:var(--muted)}
-.stats li{display:flex;align-items:center;gap:.5rem}
-.stats svg{width:20px;height:20px;color:var(--accent);flex:none}
+/* ---------- Botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;transition:transform .15s,background .2s,box-shadow .2s;line-height:1.2}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent-btn);color:#fff;box-shadow:0 10px 24px -12px var(--accent)}
+.btn-primary:hover{background:var(--accent-strong)}
+.btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--accent-line)}
+.btn-sm{padding:10px 16px;font-size:14px}
 
-/* Janela do check-up */
-.window{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
-.window-bar{display:flex;align-items:center;gap:.4rem;padding:.85rem 1.1rem;border-bottom:1px solid var(--line)}
-.window-bar i{width:11px;height:11px;border-radius:50%;background:#F87171}
-.window-bar i:nth-child(2){background:#FBBF24}
-.window-bar i:nth-child(3){background:#34D399}
-.window-bar span{margin-left:.6rem;font-size:.8rem;font-weight:600;color:var(--muted)}
-.window-body{padding:1.25rem;display:grid;gap:1rem}
-.check-title{font-size:.95rem;font-weight:700}
-.check-title small{display:block;font-weight:500;color:var(--muted);font-size:.82rem;margin-top:.1rem}
-.checks{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
-.checks label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:.7rem;align-items:center;padding:.55rem .7rem;border:1px solid var(--line);border-radius:10px;font-size:.88rem;font-weight:500;cursor:pointer;transition:border-color .15s,background-color .15s}
-.checks label:hover{border-color:#CBD3DE}
-.checks input[type=checkbox]{appearance:none;margin:0;padding:0;width:22px;height:22px;transition:none;border:2px solid #CBD3DE;border-radius:6px;display:grid;place-items:center;cursor:pointer;background:#fff}
-.checks input:checked{background:var(--accent);border-color:var(--accent)}
-.checks input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
-.checks label:has(input:checked){background:var(--accent-soft);border-color:var(--accent-line)}
-.score{background:var(--navy);color:#fff;border-radius:14px;padding:1.15rem 1.25rem;display:grid;gap:.75rem}
-.score-top{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem}
-.score small{display:block;font-size:.78rem;color:var(--navy-muted);font-weight:500}
-.score-num{font-size:2.1rem;font-weight:800;letter-spacing:-.03em;line-height:1}
-.score-num em{font-style:normal;font-size:1rem;color:var(--navy-muted);font-weight:600}
-.badge{font-size:.78rem;font-weight:700;padding:.3rem .65rem;border-radius:999px;background:rgba(220,38,38,.18);color:#FCA5A5;white-space:nowrap}
-.badge.mid{background:rgba(167,139,250,.2);color:#C4B5FD}
-.badge.good{background:rgba(22,163,74,.2);color:#86EFAC}
-.meter{height:8px;border-radius:999px;background:var(--navy-line);overflow:hidden}
-.meter b{display:block;height:100%;width:0;background:linear-gradient(90deg,#5B21B6,#8B5CF6);border-radius:inherit;transition:width .35s ease}
-.score-foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--navy-muted)}
-.score-foot a{color:var(--accent-light);font-weight:700;text-decoration:none}
-.score-foot a:hover{text-decoration:underline}
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:80px 0 88px;overflow:hidden;background:
+  linear-gradient(var(--grid) 1px,transparent 1px) 0 0/40px 40px,
+  linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/40px 40px,
+  linear-gradient(180deg,var(--hero-tint),var(--bg))}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(38px,6vw,68px);line-height:1.04;letter-spacing:-.045em;font-weight:800}
+.hero h1 .accent{color:var(--accent);display:block}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);margin-top:22px;max-width:560px}
+.sublead{font-size:15px;color:var(--muted);margin-top:14px;max-width:520px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;list-style:none}
+.trust li{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);font-weight:500}
+.trust svg{width:18px;height:18px;color:var(--accent);flex:none}
 
-/* Seções */
-.section{padding-block:clamp(4.5rem,9vw,7rem)}
+/* ---------- Seções ---------- */
+.section{padding:96px 0}
 .section.white{background:#fff}
-.head{display:grid;gap:.85rem;max-width:680px;margin:0 auto clamp(2.5rem,4.5vw,3.5rem);text-align:center;justify-items:center}
-.head.left{text-align:left;justify-items:start;margin-inline:0}
-.head p{font-size:1.08rem;color:var(--muted)}
-.label{display:inline-block;font-size:.8rem;font-weight:700;color:var(--accent-strong);letter-spacing:.08em;text-transform:uppercase}
+.section.tight{padding:72px 0}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.section-head{max-width:680px;margin-bottom:48px}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-head h2{font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-.035em;font-weight:800;margin-top:10px}
+.section-head p{color:var(--muted);font-size:17px;margin-top:14px}
 
-/* Como funciona */
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;counter-reset:step}
-@media (max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.steps{grid-template-columns:minmax(0,1fr)}}
-.steps li{counter-increment:step;background:#fff;border-radius:var(--radius);padding:1.75rem 1.5rem;display:grid;gap:.6rem;justify-items:center;text-align:center;align-content:start;box-shadow:0 1px 3px rgba(15,23,41,.06),0 10px 24px -14px rgba(15,23,41,.18)}
-.steps li::before{content:counter(step);width:48px;height:48px;border-radius:50%;background:var(--accent-btn);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.15rem;margin-bottom:.5rem}
-.steps p{color:var(--muted);font-size:.95rem}
-.note-center{max-width:640px;margin:2.5rem auto 0;text-align:center;color:var(--muted);font-size:.95rem}
+/* cards genéricos */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 
-/* Foco: infraestrutura e segurança */
-.focus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
-@media (max-width:860px){.focus{grid-template-columns:minmax(0,1fr)}}
-.focus-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(1.6rem,3vw,2.25rem);display:grid;gap:1.1rem;align-content:start;min-width:0}
-.focus-card.dark{background:var(--navy);border-color:var(--navy);color:#fff}
-.focus-card.dark p,.focus-card.dark .list li{color:#D6D2E3}
-.focus-card.dark .list svg{color:var(--accent-light)}
-.focus-card > p{color:var(--muted)}
-.icon{width:52px;height:52px;border-radius:14px;background:var(--accent-soft);color:var(--accent-strong);display:grid;place-items:center;flex:none}
-.focus-card.dark .icon{background:rgba(139,92,246,.2);color:var(--accent-light)}
-.icon svg{width:26px;height:26px}
-.list{list-style:none;margin:0;padding:0;display:grid;gap:.65rem;font-size:.97rem}
-.list li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:.65rem;line-height:1.5}
-.list svg{width:20px;height:20px;color:var(--accent);margin-top:1px}
+/* passos */
+.steps{counter-reset:step}
+.step{text-align:center;padding:32px 24px}
+.step-num{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:18px;display:grid;place-items:center;margin:0 auto 16px}
+.step h3{font-size:19px;letter-spacing:-.02em;margin-bottom:8px}
+.step p{color:var(--muted);font-size:15px}
+.note{margin-top:28px;text-align:center;color:var(--muted);font-size:15px}
 
-/* Outros serviços */
-.more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-top:1.5rem}
-@media (max-width:900px){.more{grid-template-columns:minmax(0,1fr)}}
-.mini{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;display:grid;grid-template-columns:44px minmax(0,1fr);gap:1rem;align-items:start}
-.mini .icon{width:44px;height:44px;border-radius:12px}
-.mini .icon svg{width:22px;height:22px}
-.mini h3{font-size:1.02rem}
-.mini p{color:var(--muted);font-size:.92rem;margin-top:.2rem}
-.also{margin-top:1.25rem;text-align:center;font-size:.9rem;color:var(--muted)}
+/* listas com check */
+.checks{list-style:none;display:grid;gap:12px;margin-top:18px}
+.checks li{position:relative;padding-left:30px;font-size:15.5px}
+.checks li::before{content:"";position:absolute;left:2px;top:7px;width:14px;height:8px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
 
-/* Compromissos (bloco escuro) */
+/* cartões de serviço */
+.svc-big h3{font-size:24px;letter-spacing:-.03em;margin-top:16px}
+.svc-big > p{color:var(--muted);margin-top:6px}
+.svc-big.dark{background:var(--navy);border-color:var(--navy);color:#fff}
+.svc-big.dark > p{color:var(--navy-muted)}
+.svc-big.dark .checks li::before{border-color:var(--accent-light)}
+.svc-big.dark .icon-badge{background:var(--navy-line);color:var(--accent-light)}
+.icon-badge{width:48px;height:48px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
+.icon-badge svg{width:24px;height:24px}
+.svc-row{display:flex;gap:18px;align-items:flex-start;padding:24px}
+.svc-row h3{font-size:18px;letter-spacing:-.02em}
+.svc-row p{color:var(--muted);font-size:15px;margin-top:4px}
+
+/* faixa escura de compromissos */
 .dark-band{background:var(--navy);color:#fff}
-.dark-band .head p{color:var(--navy-muted)}
-.dark-band .label{color:var(--accent-light)}
-.promises{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
-@media (max-width:900px){.promises{grid-template-columns:minmax(0,1fr)}}
-.promise{background:var(--navy-2);border:1px solid var(--navy-line);border-radius:var(--radius);padding:1.75rem;display:grid;gap:.75rem;align-content:start}
-.promise .icon{background:var(--accent);color:#fff;border-radius:50%;width:46px;height:46px}
-.promise .icon svg{width:22px;height:22px}
-.promise p{color:#C3CBD7;font-size:.97rem;line-height:1.65}
+.dark-band .section-head p{color:var(--navy-muted)}
+.dark-band .eyebrow{color:var(--accent-light)}
+.promise{background:var(--navy-2);border:1px solid var(--navy-line);border-radius:var(--radius);padding:28px}
+.promise h3{font-size:19px;margin:16px 0 8px}
+.promise p{color:var(--navy-muted);font-size:15px}
+.promise .icon-badge{background:var(--navy-line);color:var(--accent-light)}
 
-/* Planos */
-.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
-@media (max-width:800px){.plans{grid-template-columns:minmax(0,1fr)}}
-.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:2rem;display:grid;gap:1rem;align-content:start}
-.plan.featured{border:2px solid var(--accent-btn);box-shadow:var(--shadow)}
-.tag{justify-self:start;font-size:.75rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
-.featured .tag{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent-line)}
-.plan > p{color:var(--muted)}
+/* planos */
+.plan{display:flex;flex-direction:column}
+.plan .tag{display:inline-block;align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:5px 10px;border-radius:999px}
+.plan h3{font-size:22px;letter-spacing:-.03em;margin-top:14px}
+.plan > p{color:var(--muted);margin-top:6px;font-size:15px}
+.plan .checks{margin-bottom:24px}
+.plan .btn{margin-top:auto}
+.plan.featured{border:2px solid var(--accent)}
 
-/* Preços */
-.prices{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;margin:0;max-width:880px;margin-inline:auto}
-.price-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:1.5rem;padding:1.1rem 1.5rem;border-bottom:1px solid var(--line);font-size:.95rem}
-.price-row:last-child{border-bottom:0}
-.price-row dt{font-weight:700}
-.price-row dd{margin:0;color:var(--muted)}
-@media (max-width:640px){.price-row{grid-template-columns:minmax(0,1fr);gap:.2rem;padding:1rem 1.15rem}}
+/* preços */
+.price-list{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.price-row{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;padding:20px 28px;border-top:1px solid var(--line)}
+.price-row:first-child{border-top:0}
+.price-row strong{font-size:16px}
+.price-row span{color:var(--muted);font-size:15px}
 
 /* FAQ */
-.faq{max-width:880px;margin-inline:auto;display:grid;gap:.85rem}
-.faq details{background:#fff;border:1.5px solid var(--line);border-radius:12px}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 1.4rem;font-weight:600;font-size:1.02rem}
+.faq{max-width:800px;margin-inline:auto;display:grid;gap:12px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 22px}
+.faq summary{list-style:none;cursor:pointer;padding:20px 32px 20px 0;font-weight:600;font-size:16.5px;position:relative}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary svg{width:18px;height:18px;color:var(--muted);flex:none;transition:transform .2s}
-.faq details[open] summary svg{transform:rotate(180deg)}
-.faq details p{padding:0 1.4rem 1.2rem;color:var(--muted)}
+.faq summary::after{content:"";position:absolute;right:4px;top:50%;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq details p{color:var(--muted);padding-bottom:20px;font-size:15.5px}
 
-/* Contato */
-.contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,4rem);align-items:start}
-@media (max-width:860px){.contact-grid{grid-template-columns:minmax(0,1fr)}}
-.contact-info{display:grid;gap:1.75rem}
-.info{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
-.info li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:.9rem;align-items:center}
-.info .icon{width:44px;height:44px;border-radius:12px}
-.info .icon svg{width:22px;height:22px}
-.info small{display:block;font-size:.8rem;color:var(--muted);font-weight:600}
-.info strong{display:block;font-weight:700;overflow-wrap:anywhere}
-.info a{color:var(--ink);text-decoration:none}
-.info a:hover{color:var(--accent-strong)}
-.form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(1.5rem,3vw,2.1rem);box-shadow:var(--shadow);display:grid;gap:1.1rem}
-.field{display:grid;gap:.4rem;min-width:0}
-.field label{font-weight:600;font-size:.88rem}
-.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-@media (max-width:520px){.row{grid-template-columns:minmax(0,1fr)}}
-input,select,textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:.75rem .9rem;line-height:1.4;transition:border-color .15s,box-shadow .15s}
-textarea{min-height:8rem;resize:vertical}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-.form .btn{width:100%}
-.form-status{font-size:.875rem;color:var(--muted);text-align:center;min-height:1.3em}
-.fallback{font-size:.875rem;min-height:9rem}
+/* contato */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.contact-info{display:grid;gap:16px;margin-top:28px}
+.info-item{display:flex;gap:14px;align-items:flex-start}
+.info-item strong{display:block;font-size:15px}
+.info-item span{color:var(--muted);font-size:15px}
+form.card{display:grid;gap:16px}
+.field{display:grid;gap:6px}
+.field label{font-size:14px;font-weight:600}
+.field input,.field select,.field textarea{font:inherit;font-size:15.5px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.field textarea{min-height:120px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent-light);outline-offset:0;border-color:var(--accent-line);background:#fff}
+.form-note{font-size:13.5px;color:var(--muted)}
+.form-status{font-size:14px;font-weight:600;color:var(--ok);min-height:20px}
 
-/* Rodapé */
-.footer{background:var(--navy);color:#fff;padding-block:2.25rem}
-.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.25rem}
-.footer p{font-size:.88rem;color:var(--navy-muted)}
-.footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
-.footer nav a{color:var(--navy-muted);text-decoration:none;font-size:.88rem;font-weight:500}
-.footer nav a:hover{color:#fff}
+/* banner cruzado para o outro site */
+.cross{display:grid;grid-template-columns:1fr 1fr;border-radius:24px;overflow:hidden;background:var(--cross-bg);color:#fff;box-shadow:var(--shadow)}
+.cross-text{padding:48px}
+.cross-text .eyebrow{color:var(--cross-eyebrow)}
+.cross-text h2{font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-.035em;margin-top:10px}
+.cross-text p{color:rgba(255,255,255,.78);margin-top:14px;font-size:16px}
+.cross-text ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px}
+.cross-text li{font-size:13.5px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)}
+.btn-cross{background:#fff;color:var(--cross-btn-ink)}
+.btn-cross:hover{background:#f1f1f4}
+.cross-media{position:relative;min-height:320px}
+.cross-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
-/* WhatsApp flutuante */
-.wa-float{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;width:56px;height:56px;border-radius:50%;background:#1FAF5A;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(15,23,41,.45)}
-.wa-float svg{width:28px;height:28px}
+/* rodapé */
+.footer{background:var(--navy);color:var(--navy-muted);padding:56px 0 36px;font-size:14.5px}
+.footer-top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid var(--navy-line)}
+.footer .brand-name{color:#fff}
+.footer .brand-sub{color:var(--navy-muted)}
+.footer nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+.footer a{text-decoration:none}
+.footer a:hover{color:#fff}
+.footer-sites{display:grid;gap:8px}
+.footer-sites strong{color:#fff;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;font-size:13px}
+.credits{font-size:12px;line-height:1.7;margin-top:18px;color:#7C7790}
+.credits a{text-decoration:underline;text-underline-offset:2px}
+
+/* revelar ao rolar */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:1100px){
+  .main-nav,.header-cta{display:none}
+  .menu-btn{display:inline-flex}
+  .mobile-nav{display:none;border-top:1px solid var(--line);background:#fff;max-height:calc(100vh - 116px);overflow-y:auto}
+  .mobile-nav.open{display:block}
+  .mobile-nav a{display:block;padding:14px 20px;text-decoration:none;font-weight:600;border-bottom:1px solid var(--line)}
+  .mobile-nav .btn{margin:14px 20px;display:flex;border-bottom:0}
+}
+@media (max-width:980px){
+  .hero .container{grid-template-columns:1fr;gap:40px}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .contact{grid-template-columns:1fr}
+  .cross{grid-template-columns:1fr}
+  .cross-media{min-height:240px;order:-1}
+}
+@media (max-width:640px){
+  .container{width:calc(100% - 32px)}
+  .site-switch .label{display:none}
+  .site-switch .container{justify-content:center}
+  .switch{width:100%}
+  .switch a{flex:1;justify-content:center;padding:7px 8px;font-size:12.5px}
+  .switch .long{display:none}
+  .switch .short{display:inline}
+  .hero{padding:52px 0 64px}
+  .section{padding:68px 0}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .card{padding:22px}
+  .svc-row{padding:20px}
+  .price-row{grid-template-columns:1fr;gap:4px;padding:18px 20px}
+  .cross-text{padding:30px 22px}
+  .hero-ctas .btn{flex:1 1 100%}
+}
+
+/* ---------- Ajustes finos ---------- */
+h3{line-height:1.3}
+@media (max-width:640px){
+  .step{display:grid;grid-template-columns:44px 1fr;column-gap:16px;text-align:left;padding:20px 20px 22px}
+  .step-num{grid-row:span 2;width:44px;height:44px;margin:0;font-size:16px}
+  .step h3{margin-bottom:2px;align-self:center}
+}
+.btn{text-align:center}
+
+/* ---------- Tema: Redes & Desenvolvimento (roxo) ---------- */
+:root{
+  --accent:#5B21B6; --accent-btn:#5B21B6; --accent-strong:#4C1D95; --accent-soft:#EEE8FA; --accent-light:#A78BFA; --accent-line:#D3C4F5;
+  --grid:rgba(91,33,182,.07); --hero-tint:#F3EEFC;
+  --cross-bg:linear-gradient(135deg,#431407 0%,#9A3412 55%,#C2410C 100%); --cross-eyebrow:#FDBA74; --cross-btn-ink:#9A3412;
+}
+
+/* check-up */
+.checkup{padding:0;overflow:hidden}
+.win-bar{display:flex;align-items:center;gap:7px;padding:14px 20px;border-bottom:1px solid var(--line);background:#fff}
+.win-bar span{width:11px;height:11px;border-radius:50%;background:#F87171}
+.win-bar span:nth-child(2){background:#FBBF24}
+.win-bar span:nth-child(3){background:#34D399}
+.win-bar em{font-style:normal;font-size:13px;font-weight:600;color:var(--muted);margin-left:10px}
+.checkup-body{padding:22px 22px 24px}
+.checkup-body h2{font-size:18px;letter-spacing:-.02em}
+.checkup-body > p{font-size:14px;color:var(--muted);margin-top:2px}
+.opts{display:grid;gap:8px;margin-top:16px}
+.opt{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;font-size:14.5px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none}
+.opt:hover{border-color:var(--accent-line)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .box{width:20px;height:20px;border:2px solid #CFCBDA;border-radius:6px;flex:none;display:grid;place-items:center;transition:all .2s}
+.opt .box::after{content:"";width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.opt input:checked + .box{background:var(--accent);border-color:var(--accent)}
+.opt input:checked + .box::after{opacity:1}
+.opt input:focus-visible + .box{outline:3px solid var(--accent-light);outline-offset:2px}
+.opt:has(input:checked){background:var(--accent-soft);border-color:var(--accent-line)}
+.score{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line)}
+.score-top{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:var(--muted);font-weight:600}
+.score-top strong{color:var(--ink);font-size:15px}
+.score-top b{font-size:26px;letter-spacing:-.03em}
+.meter{height:8px;border-radius:99px;background:#EDEBF2;margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;border-radius:99px;background:var(--bad);transition:width .4s ease,background .4s}
+.score-foot{display:flex;justify-content:space-between;align-items:center;margin:12px 0 16px;font-size:13.5px;color:var(--muted)}
+.pill{font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:99px;background:#FEE2E2;color:#B91C1C}
+.pill.mid{background:#FEF3C7;color:#92400E}
+.pill.good{background:#DCFCE7;color:#166534}
+.score .btn{width:100%}
+
+/* desenvolvimento */
+.dev-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:48px}
+.dev-intro .section-head{margin-bottom:0}
+.term{background:var(--navy);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;color:#D9D6E4}
+.term .win-bar{background:var(--navy-2);border-color:var(--navy-line)}
+.term .win-bar em{color:var(--navy-muted)}
+.term ol{list-style:none;padding:18px 20px 20px;display:grid;gap:9px}
+.term li{display:grid;grid-template-columns:auto auto 1fr;gap:10px;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.term li.on{opacity:1;transform:none}
+.term .t{color:#7C7790}
+.term .k{color:#4ADE80}
+.term .k.p{color:var(--accent-light)}
+.term .cursor{display:inline-block;width:8px;height:15px;background:var(--accent-light);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.dev-card h3{font-size:18px;letter-spacing:-.02em;margin-top:16px}
+.dev-card p{color:var(--muted);font-size:15px;margin-top:6px}
+.dev-card .ex{margin-top:14px;font-size:13.5px;color:var(--accent-strong);background:var(--accent-soft);border-radius:8px;padding:8px 12px}
+@media (max-width:980px){.dev-intro{grid-template-columns:1fr;gap:32px}}
 </style>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 25V7l18 18V7' fill='none' stroke='%230B0A12' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='25' r='3.7' fill='%235B21B6'/%3E%3Ccircle cx='7' cy='7' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='25' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='7' r='3.7' fill='%235B21B6'/%3E%3C/svg%3E">
-<meta property="og:title" content="Nodara Soluções em TI">
-<meta property="og:description" content="Infraestrutura, redes e segurança da informação para pequenas empresas e residências.">
-<meta property="og:type" content="website">
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12.3l2.7 2.7L16 9.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-pc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></g></symbol>
-  <symbol id="i-cube" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></g></symbol>
-  <symbol id="i-net" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2V12m0 0l-5.4 5.4M12 12l5.4 5.4"/></g></symbol>
-  <symbol id="i-tag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></g></symbol>
-  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></g></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></g></symbol>
-  <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></g></symbol>
-  <symbol id="i-server" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></g></symbol>
-  <symbol id="i-chip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 10h4v4h-4zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></g></symbol>
-  <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></g></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></g></symbol>
-  <symbol id="i-insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></g></symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.5-.4z"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-</svg>
+<div class="site-switch">
+  <div class="container">
+    <span class="label"><b>Nodara</b> · escolha a área</span>
+    <nav class="switch" aria-label="Sites da Nodara">
+      <a href="./" aria-current="page"><span class="dot dot-infra"></span><span class="long">Redes & Desenvolvimento</span><span class="short">Redes & Dev</span></a>
+      <a href="equipamentos.html"><span class="dot dot-equip"></span><span class="long">Equipamentos & Impressão 3D</span><span class="short">Equipamentos & 3D</span></a>
+    </nav>
+  </div>
+</div>
 
 <header class="site-header">
-  <div class="wrap">
-    <div class="header-row">
-      <a class="brand" href="#topo" aria-label="Nodara Soluções em TI, início">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path class="n-line" d="M7 25V7l18 18V7" fill="none" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-          <circle class="n-accent" cx="7" cy="25" r="3.7"/><circle class="n-node" cx="7" cy="7" r="3.7"/>
-          <circle class="n-node" cx="25" cy="25" r="3.7"/><circle class="n-accent" cx="25" cy="7" r="3.7"/>
-        </svg>
-        <span class="brand-name">Nodara<small>Soluções em TI</small></span>
-      </a>
-      <nav class="nav" aria-label="Seções do site">
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#planos">Planos</a>
-        <a href="#duvidas">Dúvidas</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <a class="btn btn-primary btn-sm header-cta" href="#contato">Pedir diagnóstico</a>
-      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu"><svg><use href="#i-menu"/></svg></button>
-    </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Menu" hidden>
+  <div class="container">
+    <a href="#topo" class="brand" aria-label="Nodara Redes & Desenvolvimento, início">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25V7l18 18V7" fill="none" stroke="#0B0A12" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="7" cy="25" r="3.7" fill="#5B21B6"/><circle cx="7" cy="7" r="3.7" fill="#0B0A12"/><circle cx="25" cy="25" r="3.7" fill="#0B0A12"/><circle cx="25" cy="7" r="3.7" fill="#5B21B6"/></svg>
+      <span><span class="brand-name">Nodara</span><br><span class="brand-sub">Redes & Desenvolvimento</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Principal">
       <a href="#como-funciona">Como funciona</a>
       <a href="#servicos">Serviços</a>
+      <a href="#desenvolvimento">Desenvolvimento</a>
       <a href="#planos">Planos</a>
       <a href="#duvidas">Dúvidas</a>
       <a href="#contato">Contato</a>
-      <a class="btn btn-primary" href="#contato">Pedir diagnóstico</a>
     </nav>
+    <a href="#contato" class="btn btn-primary btn-sm header-cta">Pedir diagnóstico</a>
+    <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Menu">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#desenvolvimento">Desenvolvimento</a>
+    <a href="#planos">Planos</a>
+    <a href="#precos">Preços</a>
+    <a href="#duvidas">Dúvidas</a>
+    <a href="#contato">Contato</a>
+    <a href="#contato" class="btn btn-primary">Pedir diagnóstico</a>
+  </nav>
 </header>
 
-<main>
-  <section class="hero" id="topo">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1>Sua rede pode estar mais exposta <span>do que você imagina</span></h1>
-        <p class="lede">Infraestrutura, redes e segurança da informação para pequenas empresas e residências em <span data-cidade>Belo Horizonte – MG</span>.</p>
-        <p class="sublede">Backup que funciona, Wi‑Fi estável, acessos sob controle e tudo documentado. Sem jargão e sem surpresa no orçamento.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#contato">Pedir diagnóstico</a>
-          <a class="btn btn-link" href="#checkup">Fazer o check-up rápido</a>
+<main id="topo">
+<section class="hero">
+  <div class="container">
+    <div>
+      <h1>Rede estável, dados protegidos <span class="accent">e sistemas que trabalham por você</span></h1>
+      <p class="lead">Infraestrutura de rede, segurança da informação e desenvolvimento de software para pequenas empresas e residências em Belo Horizonte – MG.</p>
+      <p class="sublead">Wi‑Fi que cobre tudo, backup que funciona, acessos sob controle e as tarefas repetitivas no automático. Tudo documentado, sem jargão e sem surpresa no orçamento.</p>
+      <div class="hero-ctas">
+        <a href="#contato" class="btn btn-primary">Pedir diagnóstico</a>
+        <a href="#checkup" class="btn btn-ghost">Fazer o check-up rápido</a>
+      </div>
+      <ul class="trust">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Relatório por escrito</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>Plano por prioridade</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Em linha com a LGPD</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg>Código e acessos são seus</li>
+      </ul>
+    </div>
+
+    <div class="card checkup" id="checkup">
+      <div class="win-bar"><span></span><span></span><span></span><em>check-up de segurança</em></div>
+      <div class="checkup-body">
+        <h2>O que já está em ordem aí?</h2>
+        <p>Marque o que você já tem. Leva 30 segundos.</p>
+        <div class="opts">
+          <label class="opt"><input type="checkbox"><span class="box"></span>Backup automático com cópia fora do local</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Dois fatores no e-mail e nos sistemas</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Wi‑Fi de visitantes separado da rede interna</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Roteador e computadores atualizados</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Antivírus ativo em todas as máquinas</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Senhas em gerenciador, não em planilha</label>
         </div>
-        <ul class="stats">
-          <li><svg aria-hidden="true"><use href="#i-doc"/></svg>Relatório por escrito</li>
-          <li><svg aria-hidden="true"><use href="#i-target"/></svg>Plano por prioridade</li>
-          <li><svg aria-hidden="true"><use href="#i-lock"/></svg>Em linha com a LGPD</li>
+        <div class="score" aria-live="polite">
+          <div class="score-top"><span>Índice de proteção</span><strong><b id="score-num">0</b>/100</strong></div>
+          <div class="meter"><i id="score-bar"></i></div>
+          <div class="score-foot"><span class="pill" id="score-label">Risco alto</span><span id="score-left">6 pontos a resolver</span></div>
+          <a href="#contato" class="btn btn-primary">Quero um plano de ação →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Primeiro entendemos. Depois resolvemos o que mais importa.</h2>
+      <p>Vale para a rede, para a segurança e para os sistemas: nada é feito sem diagnóstico e sem o seu aval.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card step reveal"><div class="step-num">1</div><h3>Diagnóstico</h3><p>Levantamos equipamentos, rede, backups, contas, acessos e os processos que tomam tempo.</p></div>
+      <div class="card step reveal"><div class="step-num">2</div><h3>Plano de ação</h3><p>Relatório com os riscos, as oportunidades e as correções em ordem de prioridade.</p></div>
+      <div class="card step reveal"><div class="step-num">3</div><h3>Implementação</h3><p>Executamos o que você aprovar, com preço e prazo combinados antes.</p></div>
+      <div class="card step reveal"><div class="step-num">4</div><h3>Acompanhamento</h3><p>Opcional: mensalidade para manter tudo atualizado, monitorado e evoluindo.</p></div>
+    </div>
+    <p class="note reveal">Ao final você recebe o mapa da rede, o inventário de equipamentos e a documentação de acessos. A informação fica com você.</p>
+  </div>
+</section>
+
+<section class="section white" id="servicos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Serviços</span>
+      <h2>Infraestrutura e segurança em primeiro lugar</h2>
+      <p>O que mantém a sua operação de pé, e o que protege os seus dados.</p>
+    </div>
+    <div class="grid-2">
+      <article class="card svc-big reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></svg></div>
+        <h3>Infraestrutura e redes</h3>
+        <p>Escritórios, consultórios, lojas e residências.</p>
+        <ul class="checks">
+          <li>Diagnóstico de rede e inventário de equipamentos</li>
+          <li>Wi‑Fi mesh, cabeamento, pontos de rede e configuração de roteadores</li>
+          <li>Separação de redes: interna, visitantes e câmeras</li>
+          <li>Servidores de arquivos, impressoras e compartilhamentos</li>
+          <li>Gestão centralizada de várias unidades num painel só</li>
+          <li>Documentação com mapa da rede e acessos</li>
         </ul>
-      </div>
-
-      <aside class="window" id="checkup" aria-labelledby="checkup-title">
-        <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i><span>check-up de segurança</span></div>
-        <div class="window-body">
-          <p class="check-title" id="checkup-title">O que já está em ordem aí?<small>Marque o que você já tem. Leva 30 segundos.</small></p>
-          <ul class="checks" id="checks">
-            <li><label><input type="checkbox" value="Backup automático com cópia fora do local">Backup automático com cópia fora do local</label></li>
-            <li><label><input type="checkbox" value="Dois fatores no e-mail e nos sistemas">Dois fatores no e-mail e nos sistemas</label></li>
-            <li><label><input type="checkbox" value="Wi‑Fi de visitantes separado da rede interna">Wi‑Fi de visitantes separado da rede interna</label></li>
-            <li><label><input type="checkbox" value="Roteador e computadores atualizados">Roteador e computadores atualizados</label></li>
-            <li><label><input type="checkbox" value="Antivírus ativo em todas as máquinas">Antivírus ativo em todas as máquinas</label></li>
-            <li><label><input type="checkbox" value="Senhas em gerenciador, não em planilha">Senhas em gerenciador, não em planilha</label></li>
-          </ul>
-          <div class="score" aria-live="polite">
-            <div class="score-top">
-              <div><small>Índice de proteção</small><div class="score-num"><span id="score">0</span><em>/100</em></div></div>
-              <span class="badge" id="badge">Risco alto</span>
-            </div>
-            <div class="meter" aria-hidden="true"><b id="meter"></b></div>
-            <div class="score-foot"><span id="gaps">6 pontos a resolver</span><a href="#contato" id="to-plan">Quero um plano de ação →</a></div>
-          </div>
-        </div>
-      </aside>
+      </article>
+      <article class="card svc-big dark reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Segurança da informação</h3>
+        <p>Proteção prática, no tamanho da sua empresa.</p>
+        <ul class="checks">
+          <li>Backup na regra 3-2-1, com teste de restauração</li>
+          <li>Autenticação em dois fatores e política de senhas</li>
+          <li>Antivírus, firewall e atualizações em dia</li>
+          <li>Controle de acessos: quem entra, onde e com qual permissão</li>
+          <li>Entrada e saída de funcionários: contas criadas e bloqueadas no dia</li>
+          <li>Boas práticas de LGPD no dia a dia da equipe</li>
+        </ul>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="como-funciona">
-    <div class="wrap">
-      <div class="head">
-        <h2>Como funciona</h2>
-        <p>Começamos entendendo o que você tem. Depois resolvemos o que mais importa primeiro.</p>
+<section class="section" id="desenvolvimento">
+  <div class="container">
+    <div class="dev-intro">
+      <div class="section-head reveal">
+        <span class="eyebrow">Desenvolvimento</span>
+        <h2>Software sob medida para o que hoje é feito na mão</h2>
+        <p>Planilha que ninguém atualiza, e-mail copiado e colado, cadastro feito duas vezes. A gente transforma isso em sistema, automação ou integração, do tamanho que o seu negócio precisa.</p>
       </div>
-      <ol class="steps">
-        <li><h3>Diagnóstico</h3><p>Levantamos equipamentos, rede, backups, contas e acessos.</p></li>
-        <li><h3>Plano de ação</h3><p>Relatório com os riscos encontrados e as correções em ordem de prioridade.</p></li>
-        <li><h3>Implementação</h3><p>Executamos o que você aprovar, com preço e prazo combinados antes.</p></li>
-        <li><h3>Acompanhamento</h3><p>Opcional: mensalidade para manter tudo atualizado e monitorado.</p></li>
-      </ol>
-      <p class="note-center">Ao final você recebe o mapa da rede, o inventário de equipamentos e a documentação de acessos. A informação fica com você.</p>
-    </div>
-  </section>
-
-  <section class="section white" id="servicos">
-    <div class="wrap">
-      <div class="head">
-        <p class="label">Serviços</p>
-        <h2>Infraestrutura e segurança em primeiro lugar</h2>
-        <p>O que mantém a sua operação de pé, e o que protege os seus dados.</p>
-      </div>
-      <div class="focus">
-        <article class="focus-card">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-server"/></svg></span>
-          <h3>Infraestrutura e redes</h3>
-          <p>Escritórios, consultórios, lojas e residências.</p>
-          <ul class="list">
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Diagnóstico de rede e inventário de equipamentos</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Wi‑Fi mesh, cabeamento, pontos de rede e configuração de roteadores</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Separação de redes: interna, visitantes e câmeras</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Servidores de arquivos, impressoras e compartilhamentos</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Documentação com mapa da rede e acessos</li>
-          </ul>
-        </article>
-        <article class="focus-card dark">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
-          <h3>Segurança da informação</h3>
-          <p>Proteção prática, no tamanho da sua empresa.</p>
-          <ul class="list">
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Backup na regra 3-2-1, com teste de restauração</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Autenticação em dois fatores e política de senhas</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Antivírus, firewall e atualizações em dia</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Controle de acessos: quem entra, onde e com qual permissão</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Boas práticas de LGPD no dia a dia da equipe</li>
-          </ul>
-        </article>
-      </div>
-
-      <div class="more">
-        <article class="mini">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-pc"/></svg></span>
-          <div><h3>Computadores</h3><p>Manutenção, formatação e upgrade de SSD, memória e placa de vídeo.</p></div>
-        </article>
-        <article class="mini">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-chip"/></svg></span>
-          <div><h3>Eletrônica</h3><p>Reparo de placas, fontes e conectores, com orçamento após diagnóstico.</p></div>
-        </article>
-        <article class="mini">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-tag"/></svg></span>
-          <div><h3>Compra de equipamentos</h3><p>Orçamento com cotações, comparativo técnico e intermediação até a entrega.</p></div>
-        </article>
-      </div>
-      <p class="also">Também atendemos impressoras 3D: peças de reposição e manutenção.</p>
-    </div>
-  </section>
-
-  <section class="section dark-band">
-    <div class="wrap">
-      <div class="head">
-        <p class="label">Compromissos</p>
-        <h2>Como trabalhamos</h2>
-        <p>Regras simples que valem para todo atendimento.</p>
-      </div>
-      <div class="promises">
-        <div class="promise">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-doc"/></svg></span>
-          <h3>Tudo por escrito</h3>
-          <p>Orçamento, ordem de serviço e relatório final. Você sabe o que foi feito e por quê.</p>
-        </div>
-        <div class="promise">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-lock"/></svg></span>
-          <h3>Seus dados são seus</h3>
-          <p>Arquivos só são acessados com autorização. Senhas e documentação ficam com você, conforme a LGPD.</p>
-        </div>
-        <div class="promise">
-          <span class="icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
-          <h3>90 dias de garantia</h3>
-          <p>Nos serviços executados, com prazo no termo, como prevê o Código de Defesa do Consumidor.</p>
-        </div>
+      <div class="term reveal" aria-label="Exemplo de rotinas automáticas">
+        <div class="win-bar"><span></span><span></span><span></span><em>rotinas de hoje</em></div>
+        <ol id="term">
+          <li><span class="t">07:00</span><span class="k">✓</span><span>Backup verificado: 3 cópias, 1 fora do local</span></li>
+          <li><span class="t">08:12</span><span class="k p">→</span><span>Novo pedido no site enviado para a planilha e o financeiro</span></li>
+          <li><span class="t">09:30</span><span class="k">✓</span><span>Conta de ex-funcionário bloqueada em todos os sistemas</span></li>
+          <li><span class="t">11:05</span><span class="k p">→</span><span>Assistente de IA respondeu 14 dúvidas de clientes</span></li>
+          <li><span class="t">18:00</span><span class="k">✓</span><span>Relatório do dia enviado por e-mail <span class="cursor"></span></span></li>
+        </ol>
       </div>
     </div>
-  </section>
+    <div class="grid-3">
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <h3>Sites e páginas de venda</h3>
+        <p>Rápidos, bonitos no celular e fáceis de atualizar. Com formulário, WhatsApp e métricas.</p>
+        <div class="ex">Ex.: site institucional, catálogo, página de campanha</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+        <h3>Sistemas internos e painéis</h3>
+        <p>Cadastros, controles e relatórios num lugar só, com login e permissão por pessoa.</p>
+        <div class="ex">Ex.: controle de estoque, ordens de serviço, agenda</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>Automações e integrações</h3>
+        <p>Conectamos os sistemas que você já usa por API, para a informação andar sozinha.</p>
+        <div class="ex">Ex.: pedido → planilha → nota → e-mail ao cliente</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 8z"/></svg></div>
+        <h3>Microsoft 365 e Google Workspace</h3>
+        <p>E-mail profissional, contas, grupos, permissões, migração e ferramentas de gestão.</p>
+        <div class="ex">Ex.: migração de e-mail, painel de usuários e licenças</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg></div>
+        <h3>IA aplicada ao negócio</h3>
+        <p>Assistentes com modelos de linguagem para atendimento, triagem e leitura de documentos.</p>
+        <div class="ex">Ex.: bot de atendimento no Teams ou no WhatsApp</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+        <h3>Sustentação e melhorias</h3>
+        <p>Depois de no ar, o sistema continua com backup, atualizações e ajustes quando precisar.</p>
+        <div class="ex">Ex.: banco de horas mensal para evoluções</div>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <section class="section" id="planos">
-    <div class="wrap">
-      <div class="head">
-        <p class="label">Planos mensais</p>
-        <h2>Para quem não pode parar</h2>
-        <p>Escopo e horas definidos a partir do diagnóstico. Sem fidelidade longa.</p>
+<section class="section tight white">
+  <div class="container">
+    <div class="cross reveal">
+      <div class="cross-text">
+        <span class="eyebrow">Nodara Equipamentos & 3D</span>
+        <h2>Impressora 3D, computador ou placa com defeito?</h2>
+        <p>Manutenção e peças para impressoras 3D, conserto e upgrade de computadores e reparo de eletrônica ficam no nosso site de equipamentos.</p>
+        <ul><li>Impressoras 3D</li><li>Peças de reposição</li><li>Computadores</li><li>Eletrônica</li><li>Compra de equipamentos</li></ul>
+        <a href="equipamentos.html" class="btn btn-cross">Conhecer a Nodara Equipamentos →</a>
       </div>
-      <div class="plans">
-        <article class="plan featured">
-          <span class="tag">Pequenas empresas</span>
-          <h3>Infraestrutura e segurança gerenciadas</h3>
-          <p>Acompanhamento contínuo da rede, dos backups e dos acessos.</p>
-          <ul class="list">
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Verificação mensal dos backups e teste de restauração</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Atualizações de sistemas, roteadores e antivírus</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Entrada e saída de funcionários: contas e acessos</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Suporte remoto e visitas incluídas no pacote</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Relatório mensal com o que foi feito</li>
-          </ul>
-        </article>
-        <article class="plan">
-          <span class="tag">Residências e home office</span>
-          <h3>Rede de casa segura</h3>
-          <p>Para quem trabalha de casa e quer a rede funcionando sem dor de cabeça.</p>
-          <ul class="list">
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Wi‑Fi cobrindo a casa toda</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Rede separada para visitantes e dispositivos</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Backup das fotos e documentos da família</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Suporte remoto quando precisar</li>
-          </ul>
-        </article>
+      <div class="cross-media">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/3D_printer_working_on_green_model_parts.jpg/1280px-3D_printer_working_on_green_model_parts.jpg" alt="Impressora 3D fechada imprimindo peças verdes sobre a mesa" loading="lazy">
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section white" id="precos">
-    <div class="wrap">
-      <div class="head">
-        <p class="label">Preços</p>
-        <h2>Como cobramos</h2>
-        <p>Cada serviço tem um modelo de cobrança claro, combinado antes de começar.</p>
-      </div>
-      <dl class="prices">
-        <div class="price-row"><dt>Diagnóstico de infraestrutura e segurança</dt><dd>Projeto fechado, com relatório e plano de ação.</dd></div>
-        <div class="price-row"><dt>Implementação</dt><dd>Preço por item do plano, aprovado antes de executar.</dd></div>
-        <div class="price-row"><dt>Acompanhamento mensal</dt><dd>Mensalidade com escopo e horas definidos.</dd></div>
-        <div class="price-row"><dt>Redes residenciais</dt><dd>Visita técnica + instalação por equipamento ou ponto.</dd></div>
-        <div class="price-row"><dt>Computadores e eletrônica</dt><dd>Taxa de diagnóstico, abatida se você aprovar o serviço. Peças à parte.</dd></div>
-        <div class="price-row"><dt>Compra de equipamentos</dt><dd>Gratuito se virar compra. Taxa combinada se for só consultoria.</dd></div>
-        <div class="price-row"><dt>Impressoras 3D</dt><dd>Peças por tabela e manutenção por pacote.</dd></div>
-      </dl>
+<section class="section dark-band">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Compromissos</span>
+      <h2>Como trabalhamos</h2>
+      <p>Regras simples que valem para todo atendimento.</p>
     </div>
-  </section>
-
-  <section class="section" id="duvidas">
-    <div class="wrap">
-      <div class="head"><h2>Perguntas frequentes</h2></div>
-      <div class="faq">
-        <details><summary>Minha empresa é pequena. Preciso mesmo me preocupar com segurança?<svg aria-hidden="true"><use href="#i-chev"/></svg></summary><p>Sim. Pequenas empresas costumam ser alvo justamente por terem menos proteção. O básico bem feito (backup testado, dois fatores e rede separada) já evita a maior parte dos problemas.</p></details>
-        <details><summary>O que vem no diagnóstico?<svg aria-hidden="true"><use href="#i-chev"/></svg></summary><p>Inventário de equipamentos, mapa da rede, situação dos backups, contas e acessos, e um relatório com os riscos e as correções em ordem de prioridade.</p></details>
-        <details><summary>Sou obrigado a contratar a mensalidade?<svg aria-hidden="true"><use href="#i-chev"/></svg></summary><p>Não. Você pode contratar só o diagnóstico, só a implementação ou o acompanhamento. O relatório é seu de qualquer jeito.</p></details>
-        <details><summary>Vocês acessam meus arquivos?<svg aria-hidden="true"><use href="#i-chev"/></svg></summary><p>Só com a sua autorização e quando for necessário para o serviço. Tudo que acessamos fica registrado na ordem de serviço.</p></details>
-        <details><summary>Atendem presencialmente?<svg aria-hidden="true"><use href="#i-chev"/></svg></summary><p>Sim, em <span data-cidade>Belo Horizonte – MG</span>, com visita técnica. Boa parte do suporte do dia a dia também pode ser feita remotamente.</p></details>
-      </div>
+    <div class="grid-4">
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div><h3>Tudo por escrito</h3><p>Orçamento, ordem de serviço e relatório final. Você sabe o que foi feito e por quê.</p></div>
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Seus dados são seus</h3><p>Arquivos só são acessados com autorização. Senhas e documentação ficam com você, conforme a LGPD.</p></div>
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></div><h3>Código é seu</h3><p>Sistemas e sites entregues com código, documentação e contas registradas em nome da sua empresa.</p></div>
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div><h3>90 dias de garantia</h3><p>Nos serviços executados, com prazo no termo, como prevê o Código de Defesa do Consumidor.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section white" id="contato">
-    <div class="wrap contact-grid">
+<section class="section" id="planos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Planos mensais</span>
+      <h2>Para quem não pode parar</h2>
+      <p>Escopo e horas definidos a partir do diagnóstico. Sem fidelidade longa.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card plan featured reveal">
+        <span class="tag">Pequenas empresas</span>
+        <h3>Infraestrutura e segurança gerenciadas</h3>
+        <p>Acompanhamento contínuo da rede, dos backups e dos acessos.</p>
+        <ul class="checks">
+          <li>Verificação mensal dos backups e teste de restauração</li>
+          <li>Atualizações de sistemas, roteadores e antivírus</li>
+          <li>Entrada e saída de funcionários: contas e acessos</li>
+          <li>Suporte remoto e visitas incluídas no pacote</li>
+          <li>Relatório mensal com o que foi feito</li>
+        </ul>
+        <a href="#contato" class="btn btn-primary">Quero esse plano</a>
+      </article>
+      <article class="card plan reveal">
+        <span class="tag">Residências e home office</span>
+        <h3>Rede de casa segura</h3>
+        <p>Para quem trabalha de casa e quer a rede funcionando sem dor de cabeça.</p>
+        <ul class="checks">
+          <li>Wi‑Fi cobrindo a casa toda</li>
+          <li>Rede separada para visitantes e dispositivos</li>
+          <li>Backup das fotos e documentos da família</li>
+          <li>Suporte remoto quando precisar</li>
+        </ul>
+        <a href="#contato" class="btn btn-ghost">Quero esse plano</a>
+      </article>
+      <article class="card plan reveal">
+        <span class="tag">Sistemas e automações</span>
+        <h3>Sustentação de software</h3>
+        <p>Para o site, o sistema ou a automação continuarem rodando e melhorando.</p>
+        <ul class="checks">
+          <li>Monitoramento de disponibilidade e de erros</li>
+          <li>Backup do código e do banco de dados</li>
+          <li>Atualizações de segurança das dependências</li>
+          <li>Banco de horas para ajustes e melhorias</li>
+          <li>Relatório mensal com o que foi feito</li>
+        </ul>
+        <a href="#contato" class="btn btn-ghost">Quero esse plano</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="precos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Preços</span>
+      <h2>Como cobramos</h2>
+      <p>Cada serviço tem um modelo de cobrança claro, combinado antes de começar.</p>
+    </div>
+    <div class="price-list reveal">
+      <div class="price-row"><strong>Diagnóstico de infraestrutura e segurança</strong><span>Projeto fechado, com relatório e plano de ação.</span></div>
+      <div class="price-row"><strong>Implementação</strong><span>Preço por item do plano, aprovado antes de executar.</span></div>
+      <div class="price-row"><strong>Acompanhamento mensal</strong><span>Mensalidade com escopo e horas definidos.</span></div>
+      <div class="price-row"><strong>Redes residenciais</strong><span>Visita técnica + instalação por equipamento ou ponto.</span></div>
+      <div class="price-row"><strong>Sites e sistemas</strong><span>Projeto fechado por escopo, com etapas e entregas combinadas.</span></div>
+      <div class="price-row"><strong>Automações e integrações</strong><span>Preço por fluxo automatizado ou banco de horas.</span></div>
+      <div class="price-row"><strong>Sustentação de software</strong><span>Mensalidade com horas para ajustes e melhorias.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="duvidas">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Minha empresa é pequena. Preciso mesmo me preocupar com segurança?</summary><p>Sim. Pequenas empresas costumam ser alvo justamente por terem menos proteção. O básico bem feito (backup testado, dois fatores e rede separada) já evita a maior parte dos problemas.</p></details>
+      <details><summary>O que vem no diagnóstico?</summary><p>Inventário de equipamentos, mapa da rede, situação dos backups, contas e acessos, e um relatório com os riscos e as correções em ordem de prioridade. Se fizer sentido, apontamos também processos que valem a pena automatizar.</p></details>
+      <details><summary>Sou obrigado a contratar a mensalidade?</summary><p>Não. Você pode contratar só o diagnóstico, só a implementação ou o acompanhamento. O relatório é seu de qualquer jeito.</p></details>
+      <details><summary>Vocês acessam meus arquivos?</summary><p>Só com a sua autorização e quando for necessário para o serviço. Tudo que acessamos fica registrado na ordem de serviço.</p></details>
+      <details><summary>O código e as contas do sistema ficam comigo?</summary><p>Sim. O código, a documentação e as contas de hospedagem e domínio ficam registrados em nome da sua empresa. Se um dia quiser trocar de fornecedor, leva tudo.</p></details>
+      <details><summary>Quanto tempo leva para fazer um site ou sistema?</summary><p>Depende do escopo. Um site institucional costuma levar poucas semanas; sistemas e automações são divididos em etapas curtas, com entregas que você já usa no caminho.</p></details>
+      <details><summary>Atendem presencialmente?</summary><p>Sim, em Belo Horizonte – MG, com visita técnica. Boa parte do suporte do dia a dia e todo o desenvolvimento também podem ser feitos remotamente.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="contato">
+  <div class="container contact">
+    <div class="reveal">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Contato</span>
+        <h2>Peça seu diagnóstico</h2>
+        <p>Conte como está a sua estrutura hoje, ou o que você quer automatizar, e respondemos com os próximos passos.</p>
+      </div>
       <div class="contact-info">
-        <div class="head left" style="margin-bottom:0">
-          <p class="label">Contato</p>
-          <h2>Peça seu diagnóstico</h2>
-          <p>Conte como está a sua estrutura hoje e respondemos com os próximos passos.</p>
-        </div>
-        <ul class="info">
-          <li data-contato="whatsapp" hidden><span class="icon"><svg aria-hidden="true"><use href="#i-wa"/></svg></span><div><small>WhatsApp</small><strong></strong></div></li>
-          <li data-contato="email" hidden><span class="icon"><svg aria-hidden="true"><use href="#i-mail"/></svg></span><div><small>E-mail</small><strong></strong></div></li>
-          <li data-contato="instagram" hidden><span class="icon"><svg aria-hidden="true"><use href="#i-insta"/></svg></span><div><small>Instagram</small><strong></strong></div></li>
-          <li><span class="icon"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><div><small>Atendimento</small><strong><span data-cidade>Belo Horizonte – MG</span> · presencial e remoto</strong></div></li>
-        </ul>
+        <div class="info-item"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><strong>Atendimento</strong><span>Belo Horizonte – MG · presencial e remoto</span></div></div>
+        <div class="info-item"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div><div><strong>Resposta por escrito</strong><span>Com o que entendemos, o que sugerimos e quanto custa.</span></div></div>
+        <div class="info-item"><div class="icon-badge" style="background:#FFF1E6;color:#C2410C"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17h10v4H7z"/></svg></div><div><strong>Equipamento com defeito?</strong><span>Impressoras 3D, computadores e eletrônica: <a href="equipamentos.html#contato" style="color:#C2410C;font-weight:600">fale com a Nodara Equipamentos →</a></span></div></div>
       </div>
-
-      <form class="form" id="form" autocomplete="on">
-        <div class="row">
-          <div class="field">
-            <label for="f-nome">Nome</label>
-            <input type="text" id="f-nome" name="nome" required autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="f-servico">Serviço</label>
-            <select id="f-servico" name="servico" required>
-              <option value="">Escolha</option>
-              <option>Diagnóstico de infraestrutura e segurança</option>
-              <option>Rede e Wi‑Fi para empresa</option>
-              <option>Rede residencial</option>
-              <option>Backup e segurança</option>
-              <option>Acompanhamento mensal</option>
-              <option>Manutenção ou upgrade de computadores</option>
-              <option>Eletrônica</option>
-              <option>Orçamento de equipamentos</option>
-              <option>Impressoras 3D (peças ou manutenção)</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label for="f-msg">Mensagem</label>
-          <textarea id="f-msg" name="mensagem" required placeholder="Quantas pessoas e computadores, como é a internet hoje e o que está incomodando."></textarea>
-        </div>
-        <button class="btn btn-primary" type="submit" id="f-enviar">Enviar pedido</button>
-        <p class="form-status" id="f-status" aria-live="polite"></p>
-        <textarea class="fallback" id="f-fallback" aria-label="Texto do pedido para copiar" readonly hidden></textarea>
-      </form>
     </div>
-  </section>
+    <form class="card reveal" data-pedido="Nodara Redes & Desenvolvimento" novalidate>
+      <div class="field"><label for="nome">Nome</label><input id="nome" name="nome" data-label="Nome" autocomplete="name" required></div>
+      <div class="field"><label for="empresa">Empresa ou bairro <span style="color:var(--muted);font-weight:500">(opcional)</span></label><input id="empresa" name="empresa" data-label="Empresa/bairro" autocomplete="organization"></div>
+      <div class="field"><label for="servico">Serviço</label>
+        <select id="servico" name="servico" data-label="Serviço" required>
+          <option value="">Escolha</option>
+          <option>Diagnóstico de infraestrutura e segurança</option>
+          <option>Rede e Wi‑Fi para empresa</option>
+          <option>Rede residencial</option>
+          <option>Backup e segurança</option>
+          <option>Acompanhamento mensal</option>
+          <option>Site ou página de venda</option>
+          <option>Sistema interno ou painel</option>
+          <option>Automação ou integração</option>
+          <option>Microsoft 365 / Google Workspace</option>
+          <option>IA para o negócio</option>
+        </select>
+      </div>
+      <div class="field"><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" data-label="Mensagem" placeholder="Ex.: escritório com 8 computadores, Wi‑Fi caindo e backup num HD externo."></textarea></div>
+      <button type="submit" class="btn btn-primary">Copiar pedido</button>
+      <p class="form-note">O pedido é montado e copiado para você colar na conversa com a Nodara. Nada é enviado sem você ver.</p>
+      <p class="form-status" role="status"></p>
+    </form>
+  </div>
+</section>
 </main>
 
 <footer class="footer">
-  <div class="wrap footer-row">
-    <a class="brand" href="#topo" aria-label="Nodara Soluções em TI, voltar ao início" style="margin-right:0">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path class="n-line" d="M7 25V7l18 18V7" fill="none" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-        <circle class="n-accent" cx="7" cy="25" r="3.7"/><circle class="n-node" cx="7" cy="7" r="3.7"/>
-        <circle class="n-node" cx="25" cy="25" r="3.7"/><circle class="n-accent" cx="25" cy="7" r="3.7"/>
-      </svg>
-      <span class="brand-name">Nodara<small>Soluções em TI</small></span>
-    </a>
-    <nav aria-label="Rodapé">
-      <a href="#servicos">Serviços</a>
-      <a href="#planos">Planos</a>
-      <a href="#precos">Preços</a>
-      <a href="#duvidas">Dúvidas</a>
-      <a href="#contato">Contato</a>
-    </nav>
-    <p>© 2026 Nodara Soluções em TI · <span data-cidade>Belo Horizonte – MG</span></p>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="#topo" class="brand">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25V7l18 18V7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="7" cy="25" r="3.7" fill="#A78BFA"/><circle cx="7" cy="7" r="3.7" fill="#fff"/><circle cx="25" cy="25" r="3.7" fill="#fff"/><circle cx="25" cy="7" r="3.7" fill="#A78BFA"/></svg>
+          <span><span class="brand-name">Nodara</span><br><span class="brand-sub">Redes & Desenvolvimento</span></span>
+        </a>
+        <nav style="margin-top:22px" aria-label="Rodapé">
+          <a href="#servicos">Serviços</a><a href="#desenvolvimento">Desenvolvimento</a><a href="#planos">Planos</a><a href="#precos">Preços</a><a href="#duvidas">Dúvidas</a><a href="#contato">Contato</a>
+        </nav>
+      </div>
+      <div class="footer-sites">
+        <strong>Sites Nodara</strong>
+        <a href="./" aria-current="page"><span class="dot dot-infra" style="display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px"></span>Redes & Desenvolvimento</a>
+        <a href="equipamentos.html"><span class="dot dot-equip" style="display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px"></span>Equipamentos & Impressão 3D</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="ano">2026</span> Nodara Soluções em TI · Belo Horizonte – MG</span>
+    </div>
+    <p class="credits">Foto: <a href="https://commons.wikimedia.org/wiki/File:3D_printer_working_on_green_model_parts.jpg" target="_blank" rel="noopener">Shixart1985</a>, CC BY 2.0, via Wikimedia Commons.</p>
   </div>
 </footer>
 
-<a class="wa-float" id="wa-float" href="#contato" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" hidden><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
-
 <script>
-(() => {
-  // ===== Dados de contato: preencha aqui =====
-  const CONFIG = {
-    cidade: "Belo Horizonte – MG",
-    whatsapp: "",   // só números, com 55 e DDD. Ex.: 5531999999999
-    email: "",
-    instagram: ""   // ex.: @nodara.ti
-  };
+(function(){
+  // menu mobile
+  var btn = document.querySelector('.menu-btn');
+  var nav = document.getElementById('mobile-nav');
+  if (btn && nav) {
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if (e.target.closest('a')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    });
+  }
 
-  const whats = (CONFIG.whatsapp || "").replace(/\D/g, "");
-  const formatPhone = (digits) => {
-    const n = digits.startsWith("55") ? digits.slice(2) : digits;
-    if (n.length === 11) return `(${n.slice(0,2)}) ${n.slice(2,7)}-${n.slice(7)}`;
-    if (n.length === 10) return `(${n.slice(0,2)}) ${n.slice(2,6)}-${n.slice(6)}`;
-    return digits;
-  };
-  const waUrl = (text) => `https://wa.me/${whats}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
+  // ano no rodapé
+  var y = document.getElementById('ano');
+  if (y) y.textContent = new Date().getFullYear();
 
-  document.querySelectorAll("[data-cidade]").forEach((el) => { el.textContent = CONFIG.cidade; });
+  // animação ao rolar
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('in'); }); }
 
-  const contacts = {
-    whatsapp: whats ? { text: formatPhone(whats), href: waUrl("") } : null,
-    email: CONFIG.email ? { text: CONFIG.email } : null,
-    instagram: CONFIG.instagram ? { text: CONFIG.instagram, href: `https://instagram.com/${CONFIG.instagram.replace(/^@/, "")}` } : null
-  };
-  document.querySelectorAll("[data-contato]").forEach((item) => {
-    const contact = contacts[item.dataset.contato];
-    if (!contact) return;
-    const holder = item.querySelector("strong");
-    if (contact.href) {
-      const link = document.createElement("a");
-      link.href = contact.href; link.target = "_blank"; link.rel = "noopener"; link.textContent = contact.text;
-      holder.replaceChildren(link);
-    } else {
-      holder.textContent = contact.text;
-    }
-    item.hidden = false;
-  });
+  // formulário: monta o pedido e copia
+  var form = document.querySelector('form[data-pedido]');
+  if (form) {
+    var status = form.querySelector('.form-status');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var data = new FormData(form);
+      var linhas = ['Pedido – ' + form.getAttribute('data-pedido')];
+      form.querySelectorAll('[name]').forEach(function(f){
+        var v = (data.get(f.name) || '').toString().trim();
+        if (v) linhas.push((f.getAttribute('data-label') || f.name) + ': ' + v);
+      });
+      var texto = linhas.join('\n');
+      function ok(){ status.textContent = 'Pedido copiado. Agora é só colar na conversa com a Nodara.'; }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = texto; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); ok(); } catch(err) { status.textContent = 'Não foi possível copiar automaticamente.'; }
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(texto).then(ok, fallback); } else { fallback(); }
+    });
+  }
+})();
 
-  const floatButton = document.getElementById("wa-float");
-  if (whats) { floatButton.href = waUrl("Olá, Nodara! Quero um diagnóstico."); floatButton.hidden = false; }
-
-  // ===== Menu no celular =====
-  const menuButton = document.getElementById("menu-btn");
-  const mobileNav = document.getElementById("mobile-nav");
-  const setMenu = (open) => { mobileNav.hidden = !open; menuButton.setAttribute("aria-expanded", String(open)); menuButton.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu"); };
-  menuButton.addEventListener("click", () => setMenu(mobileNav.hidden));
-  mobileNav.addEventListener("click", (event) => { if (event.target.closest("a")) setMenu(false); });
-
-  // ===== Check-up de segurança =====
-  const checkboxes = [...document.querySelectorAll("#checks input")];
-  const scoreEl = document.getElementById("score");
-  const meterEl = document.getElementById("meter");
-  const badgeEl = document.getElementById("badge");
-  const gapsEl = document.getElementById("gaps");
-  const missingItems = () => checkboxes.filter((box) => !box.checked).map((box) => box.value);
-
-  const updateScore = () => {
-    const done = checkboxes.filter((box) => box.checked).length;
-    const score = Math.round((done / checkboxes.length) * 100);
-    const missing = checkboxes.length - done;
-    scoreEl.textContent = score;
-    meterEl.style.width = `${score}%`;
-    badgeEl.className = "badge" + (score >= 80 ? " good" : score >= 50 ? " mid" : "");
-    badgeEl.textContent = score >= 80 ? "Bom caminho" : score >= 50 ? "Atenção" : "Risco alto";
-    gapsEl.textContent = missing === 0 ? "Tudo marcado. Vale confirmar no diagnóstico." : `${missing} ${missing === 1 ? "ponto" : "pontos"} a resolver`;
-  };
-  checkboxes.forEach((box) => box.addEventListener("change", updateScore));
-  updateScore();
-
-  document.getElementById("to-plan").addEventListener("click", () => {
-    const missing = missingItems();
-    document.getElementById("f-servico").value = "Diagnóstico de infraestrutura e segurança";
-    const message = document.getElementById("f-msg");
-    if (!message.value.trim()) {
-      message.value = `Fiz o check-up do site e deu ${scoreEl.textContent}/100.` + (missing.length ? `\nAinda não tenho:\n- ${missing.join("\n- ")}` : "");
-    }
-  });
-
-  // ===== Pedido de orçamento =====
-  const form = document.getElementById("form");
-  const submitButton = document.getElementById("f-enviar");
-  const statusLine = document.getElementById("f-status");
-  const fallback = document.getElementById("f-fallback");
-  submitButton.textContent = whats ? "Enviar pelo WhatsApp" : "Copiar pedido";
-
-  const buildRequest = () => {
-    const data = new FormData(form);
-    return [
-      "Olá, Nodara! Quero um orçamento.",
-      `Nome: ${String(data.get("nome")).trim()}`,
-      `Serviço: ${data.get("servico")}`,
-      `Mensagem: ${String(data.get("mensagem")).trim()}`
-    ].join("\n");
-  };
-
-  const showFallback = (text) => {
-    fallback.hidden = false;
-    fallback.value = text;
-    fallback.focus();
-    fallback.select();
-    statusLine.textContent = "Copie o texto abaixo e envie pelo nosso contato.";
-  };
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const text = buildRequest();
-    if (whats) {
-      const link = document.createElement("a");
-      link.href = waUrl(text); link.target = "_blank"; link.rel = "noopener";
-      document.body.appendChild(link); link.click(); link.remove();
-      statusLine.textContent = "Abrindo o WhatsApp com o seu pedido.";
-      return;
-    }
-    try {
-      navigator.clipboard.writeText(text)
-        .then(() => { statusLine.textContent = "Pedido copiado. Agora é só colar na mensagem."; fallback.hidden = true; })
-        .catch(() => showFallback(text));
-    } catch (err) { showFallback(text); }
-  });
+// check-up de segurança
+(function(){
+  var boxes = document.querySelectorAll('#checkup input[type=checkbox]');
+  var num = document.getElementById('score-num'), bar = document.getElementById('score-bar');
+  var label = document.getElementById('score-label'), left = document.getElementById('score-left');
+  function update(){
+    var total = boxes.length, ok = 0;
+    boxes.forEach(function(b){ if (b.checked) ok++; });
+    var score = Math.round(ok / total * 100), falta = total - ok;
+    num.textContent = score; bar.style.width = score + '%';
+    if (score === 100) { label.textContent = 'Bem protegido'; label.className = 'pill good'; bar.style.background = 'var(--ok)'; }
+    else if (score >= 50) { label.textContent = 'Atenção'; label.className = 'pill mid'; bar.style.background = '#F59E0B'; }
+    else { label.textContent = 'Risco alto'; label.className = 'pill'; bar.style.background = 'var(--bad)'; }
+    left.textContent = falta === 0 ? 'Nada pendente. Vamos manter assim?' : (falta === 1 ? '1 ponto a resolver' : falta + ' pontos a resolver');
+  }
+  boxes.forEach(function(b){ b.addEventListener('change', update); });
+  update();
+})();
+// terminal: linhas aparecem em sequência
+(function(){
+  var items = document.querySelectorAll('#term li');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(){ items.forEach(function(li,i){ setTimeout(function(){ li.classList.add('on'); }, reduce ? 0 : i * 450); }); }
+  var term = document.getElementById('term');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting) { show(); io.disconnect(); } }, {threshold:.4});
+    io.observe(term);
+  } else show();
 })();
 </script>
 </body>
