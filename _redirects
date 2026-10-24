@@ -1,0 +1,9 @@
+# Produção com subdomínios (formato Netlify; o mesmo projeto atende os três domínios).
+# Os domínios são exemplos: troque pelos registrados e mantenha igual a CONFIG.dominios em shared/nodara.js.
+https://support.nodara.com.br/shared/*   /shared/:splat     200!
+https://support.nodara.com.br/*          /support/:splat    200!
+https://hardware.nodara.com.br/shared/*  /shared/:splat     200!
+https://hardware.nodara.com.br/*         /hardware/:splat   200!
+
+# Endereços antigos
+/equipamentos.html   /hardware/   301
