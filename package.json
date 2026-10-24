@@ -1,0 +1,8 @@
+{
+  "name": "nodara-solucoes-ti",
+  "private": true,
+  "description": "Sites da Nodara: marca, Nodara Support e Nodara Hardware (HTML, CSS e JS puros, sem build).",
+  "scripts": {
+    "dev": "node dev-server.mjs"
+  }
+}

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-pagina="support">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nodara Support · Suporte de TI, redes e desenvolvimento</title>
+<meta name="description" content="Infraestrutura de rede, segurança da informação e desenvolvimento de software para pequenas empresas e residências em Belo Horizonte – MG.">
+<meta name="theme-color" content="#0B0A12">
+<meta property="og:title" content="Nodara Support · Suporte de TI, redes e desenvolvimento">
+<meta property="og:description" content="Rede estável, dados protegidos e sistemas que trabalham por você. Belo Horizonte – MG.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 25V7l18 18V7' fill='none' stroke='%230B0A12' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='25' r='3.7' fill='%235B21B6'/%3E%3Ccircle cx='7' cy='7' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='25' r='3.7' fill='%230B0A12'/%3E%3Ccircle cx='25' cy='7' r='3.7' fill='%235B21B6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/nodara.css">
+<script src="../shared/nodara.js" defer></script>
+<style>
+/* ---------- Tema: Nodara Support (roxo) ---------- */
+:root{
+  --accent:#5B21B6; --accent-btn:#5B21B6; --accent-strong:#4C1D95; --accent-soft:#EEE8FA; --accent-light:#A78BFA; --accent-line:#D3C4F5;
+  --grid:rgba(91,33,182,.07); --hero-tint:#F3EEFC;
+  --cross-bg:linear-gradient(135deg,#431407 0%,#9A3412 55%,#C2410C 100%); --cross-eyebrow:#FDBA74; --cross-btn-ink:#9A3412;
+}
+
+/* check-up */
+.checkup{padding:0;overflow:hidden}
+.win-bar{display:flex;align-items:center;gap:7px;padding:14px 20px;border-bottom:1px solid var(--line);background:#fff}
+.win-bar span{width:11px;height:11px;border-radius:50%;background:#F87171}
+.win-bar span:nth-child(2){background:#FBBF24}
+.win-bar span:nth-child(3){background:#34D399}
+.win-bar em{font-style:normal;font-size:13px;font-weight:600;color:var(--muted);margin-left:10px}
+.checkup-body{padding:22px 22px 24px}
+.checkup-body h2{font-size:18px;letter-spacing:-.02em}
+.checkup-body > p{font-size:14px;color:var(--muted);margin-top:2px}
+.opts{display:grid;gap:8px;margin-top:16px}
+.opt{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;font-size:14.5px;cursor:pointer;transition:border-color .2s,background .2s;user-select:none}
+.opt:hover{border-color:var(--accent-line)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .box{width:20px;height:20px;border:2px solid #CFCBDA;border-radius:6px;flex:none;display:grid;place-items:center;transition:all .2s}
+.opt .box::after{content:"";width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.opt input:checked + .box{background:var(--accent);border-color:var(--accent)}
+.opt input:checked + .box::after{opacity:1}
+.opt input:focus-visible + .box{outline:3px solid var(--accent-light);outline-offset:2px}
+.opt:has(input:checked){background:var(--accent-soft);border-color:var(--accent-line)}
+.score{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line)}
+.score-top{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:var(--muted);font-weight:600}
+.score-top strong{color:var(--ink);font-size:15px}
+.score-top b{font-size:26px;letter-spacing:-.03em}
+.meter{height:8px;border-radius:99px;background:#EDEBF2;margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;border-radius:99px;background:var(--bad);transition:width .4s ease,background .4s}
+.score-foot{display:flex;justify-content:space-between;align-items:center;margin:12px 0 16px;font-size:13.5px;color:var(--muted)}
+.pill{font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:99px;background:#FEE2E2;color:#B91C1C}
+.pill.mid{background:#FEF3C7;color:#92400E}
+.pill.good{background:#DCFCE7;color:#166534}
+.score .btn{width:100%}
+
+/* desenvolvimento */
+.dev-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:48px}
+.dev-intro .section-head{margin-bottom:0}
+.term{background:var(--navy);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;color:#D9D6E4}
+.term .win-bar{background:var(--navy-2);border-color:var(--navy-line)}
+.term .win-bar em{color:var(--navy-muted)}
+.term ol{list-style:none;padding:18px 20px 20px;display:grid;gap:9px}
+.term li{display:grid;grid-template-columns:auto auto 1fr;gap:10px;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.term li.on{opacity:1;transform:none}
+.term .t{color:#7C7790}
+.term .k{color:#4ADE80}
+.term .k.p{color:var(--accent-light)}
+.term .cursor{display:inline-block;width:8px;height:15px;background:var(--accent-light);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.dev-card h3{font-size:18px;letter-spacing:-.02em;margin-top:16px}
+.dev-card p{color:var(--muted);font-size:15px;margin-top:6px}
+.dev-card .ex{margin-top:14px;font-size:13.5px;color:var(--accent-strong);background:var(--accent-soft);border-radius:8px;padding:8px 12px}
+@media (max-width:980px){.dev-intro{grid-template-columns:1fr;gap:32px}}
+</style>
+</head>
+<body>
+
+<nodara-header>
+  <div class="area-bar">
+    <div class="container">
+      <a href="#conteudo" class="area-name"><span class="dot dot-support" aria-hidden="true"></span>Support <small>Suporte de TI</small></a>
+      <nav class="area-nav" aria-label="Seções do Nodara Support">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#desenvolvimento">Desenvolvimento</a>
+        <a href="#planos">Planos</a>
+        <a href="#precos">Preços</a>
+        <a href="#duvidas">Dúvidas</a>
+      </nav>
+      <a href="#contato" class="btn btn-primary btn-sm area-cta">Pedir diagnóstico</a>
+    </div>
+  </div>
+</nodara-header>
+
+<main id="conteudo">
+<section class="hero">
+  <div class="container">
+    <div>
+      <span class="eyebrow hero-eyebrow">Nodara Support</span>
+      <h1>Rede estável, dados protegidos <span class="accent">e sistemas que trabalham por você</span></h1>
+      <p class="lead">Infraestrutura de rede, segurança da informação e desenvolvimento de software para pequenas empresas e residências em Belo Horizonte – MG.</p>
+      <p class="sublead">Wi‑Fi que cobre tudo, backup que funciona, acessos sob controle e as tarefas repetitivas no automático. Tudo documentado, sem jargão e sem surpresa no orçamento.</p>
+      <div class="hero-ctas">
+        <a href="#contato" class="btn btn-primary">Pedir diagnóstico</a>
+        <a href="#checkup" class="btn btn-ghost">Fazer o check-up rápido</a>
+      </div>
+      <ul class="trust">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Relatório por escrito</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>Plano por prioridade</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Em linha com a LGPD</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg>Código e acessos são seus</li>
+      </ul>
+    </div>
+
+    <div class="card checkup" id="checkup">
+      <div class="win-bar"><span></span><span></span><span></span><em>check-up de segurança</em></div>
+      <div class="checkup-body">
+        <h2>O que já está em ordem aí?</h2>
+        <p>Marque o que você já tem. Leva 30 segundos.</p>
+        <div class="opts">
+          <label class="opt"><input type="checkbox"><span class="box"></span>Backup automático com cópia fora do local</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Dois fatores no e-mail e nos sistemas</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Wi‑Fi de visitantes separado da rede interna</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Roteador e computadores atualizados</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Antivírus ativo em todas as máquinas</label>
+          <label class="opt"><input type="checkbox"><span class="box"></span>Senhas em gerenciador, não em planilha</label>
+        </div>
+        <div class="score" aria-live="polite">
+          <div class="score-top"><span>Índice de proteção</span><strong><b id="score-num">0</b>/100</strong></div>
+          <div class="meter"><i id="score-bar"></i></div>
+          <div class="score-foot"><span class="pill" id="score-label">Risco alto</span><span id="score-left">6 pontos a resolver</span></div>
+          <a href="#contato" class="btn btn-primary">Quero um plano de ação →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Primeiro entendemos. Depois resolvemos o que mais importa.</h2>
+      <p>Vale para a rede, para a segurança e para os sistemas: nada é feito sem diagnóstico e sem o seu aval.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card step reveal"><div class="step-num">1</div><h3>Diagnóstico</h3><p>Levantamos equipamentos, rede, backups, contas, acessos e os processos que tomam tempo.</p></div>
+      <div class="card step reveal"><div class="step-num">2</div><h3>Plano de ação</h3><p>Relatório com os riscos, as oportunidades e as correções em ordem de prioridade.</p></div>
+      <div class="card step reveal"><div class="step-num">3</div><h3>Implementação</h3><p>Executamos o que você aprovar, com preço e prazo combinados antes.</p></div>
+      <div class="card step reveal"><div class="step-num">4</div><h3>Acompanhamento</h3><p>Opcional: mensalidade para manter tudo atualizado, monitorado e evoluindo.</p></div>
+    </div>
+    <p class="note reveal">Ao final você recebe o mapa da rede, o inventário de equipamentos e a documentação de acessos. A informação fica com você.</p>
+  </div>
+</section>
+
+<section class="section white" id="servicos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Serviços</span>
+      <h2>Infraestrutura e segurança em primeiro lugar</h2>
+      <p>O que mantém a sua operação de pé, e o que protege os seus dados.</p>
+    </div>
+    <div class="grid-2">
+      <article class="card svc-big reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></svg></div>
+        <h3>Infraestrutura e redes</h3>
+        <p>Escritórios, consultórios, lojas e residências.</p>
+        <ul class="checks">
+          <li>Diagnóstico de rede e inventário de equipamentos</li>
+          <li>Wi‑Fi mesh, cabeamento, pontos de rede e configuração de roteadores</li>
+          <li>Separação de redes: interna, visitantes e câmeras</li>
+          <li>Servidores de arquivos, impressoras e compartilhamentos</li>
+          <li>Gestão centralizada de várias unidades num painel só</li>
+          <li>Documentação com mapa da rede e acessos</li>
+        </ul>
+        <p class="related"><span class="dot dot-hardware" aria-hidden="true"></span><span>Computador lento, com defeito ou pedindo upgrade? <a href="../hardware/#computadores" data-site="hardware" data-hash="#computadores">Nodara Hardware →</a></span></p>
+      </article>
+      <article class="card svc-big dark reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Segurança da informação</h3>
+        <p>Proteção prática, no tamanho da sua empresa.</p>
+        <ul class="checks">
+          <li>Backup na regra 3-2-1, com teste de restauração</li>
+          <li>Autenticação em dois fatores e política de senhas</li>
+          <li>Antivírus, firewall e atualizações em dia</li>
+          <li>Controle de acessos: quem entra, onde e com qual permissão</li>
+          <li>Entrada e saída de funcionários: contas criadas e bloqueadas no dia</li>
+          <li>Boas práticas de LGPD no dia a dia da equipe</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="desenvolvimento">
+  <div class="container">
+    <div class="dev-intro">
+      <div class="section-head reveal">
+        <span class="eyebrow">Desenvolvimento</span>
+        <h2>Software sob medida para o que hoje é feito na mão</h2>
+        <p>Planilha que ninguém atualiza, e-mail copiado e colado, cadastro feito duas vezes. A gente transforma isso em sistema, automação ou integração, do tamanho que o seu negócio precisa.</p>
+      </div>
+      <div class="term reveal" aria-label="Exemplo de rotinas automáticas">
+        <div class="win-bar"><span></span><span></span><span></span><em>rotinas de hoje</em></div>
+        <ol id="term">
+          <li><span class="t">07:00</span><span class="k">✓</span><span>Backup verificado: 3 cópias, 1 fora do local</span></li>
+          <li><span class="t">08:12</span><span class="k p">→</span><span>Novo pedido no site enviado para a planilha e o financeiro</span></li>
+          <li><span class="t">09:30</span><span class="k">✓</span><span>Conta de ex-funcionário bloqueada em todos os sistemas</span></li>
+          <li><span class="t">11:05</span><span class="k p">→</span><span>Assistente de IA respondeu 14 dúvidas de clientes</span></li>
+          <li><span class="t">18:00</span><span class="k">✓</span><span>Relatório do dia enviado por e-mail <span class="cursor"></span></span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="grid-3">
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <h3>Sites e páginas de venda</h3>
+        <p>Rápidos, bonitos no celular e fáceis de atualizar. Com formulário, WhatsApp e métricas.</p>
+        <div class="ex">Ex.: site institucional, catálogo, página de campanha</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+        <h3>Sistemas internos e painéis</h3>
+        <p>Cadastros, controles e relatórios num lugar só, com login e permissão por pessoa.</p>
+        <div class="ex">Ex.: controle de estoque, ordens de serviço, agenda</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>Automações e integrações</h3>
+        <p>Conectamos os sistemas que você já usa por API, para a informação andar sozinha.</p>
+        <div class="ex">Ex.: pedido → planilha → nota → e-mail ao cliente</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 8z"/></svg></div>
+        <h3>Microsoft 365 e Google Workspace</h3>
+        <p>E-mail profissional, contas, grupos, permissões, migração e ferramentas de gestão.</p>
+        <div class="ex">Ex.: migração de e-mail, painel de usuários e licenças</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg></div>
+        <h3>IA aplicada ao negócio</h3>
+        <p>Assistentes com modelos de linguagem para atendimento, triagem e leitura de documentos.</p>
+        <div class="ex">Ex.: bot de atendimento no Teams ou no WhatsApp</div>
+      </article>
+      <article class="card dev-card reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+        <h3>Sustentação e melhorias</h3>
+        <p>Depois de no ar, o sistema continua com backup, atualizações e ajustes quando precisar.</p>
+        <div class="ex">Ex.: banco de horas mensal para evoluções</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section tight white">
+  <div class="container">
+    <div class="cross reveal">
+      <div class="cross-text">
+        <span class="eyebrow">Nodara Hardware</span>
+        <h2>Impressora 3D, computador ou placa com defeito?</h2>
+        <p>Manutenção e peças para impressoras 3D, conserto e upgrade de computadores e reparo de eletrônica ficam no Nodara Hardware, a nossa área de manutenção de equipamentos.</p>
+        <ul><li>Impressoras 3D</li><li>Peças de reposição</li><li>Computadores</li><li>Eletrônica</li><li>Compra de equipamentos</li></ul>
+        <a href="../hardware/" data-site="hardware" class="btn btn-cross">Conhecer o Hardware →</a>
+      </div>
+      <div class="cross-media">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/3D_printer_working_on_green_model_parts.jpg/1280px-3D_printer_working_on_green_model_parts.jpg" alt="Impressora 3D fechada imprimindo peças verdes sobre a mesa" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-band">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Compromissos</span>
+      <h2>Como trabalhamos</h2>
+      <p>Regras simples que valem para todo atendimento.</p>
+    </div>
+    <div class="grid-4">
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div><h3>Tudo por escrito</h3><p>Orçamento, ordem de serviço e relatório final. Você sabe o que foi feito e por quê.</p></div>
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Seus dados são seus</h3><p>Arquivos só são acessados com autorização. Senhas e documentação ficam com você, conforme a LGPD.</p></div>
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></div><h3>Código é seu</h3><p>Sistemas e sites entregues com código, documentação e contas registradas em nome da sua empresa.</p></div>
+      <div class="promise reveal"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div><h3>90 dias de garantia</h3><p>Nos serviços executados, com prazo no termo, como prevê o Código de Defesa do Consumidor.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="planos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Planos mensais</span>
+      <h2>Para quem não pode parar</h2>
+      <p>Escopo e horas definidos a partir do diagnóstico. Sem fidelidade longa.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card plan featured reveal">
+        <span class="tag">Pequenas empresas</span>
+        <h3>Infraestrutura e segurança gerenciadas</h3>
+        <p>Acompanhamento contínuo da rede, dos backups e dos acessos.</p>
+        <ul class="checks">
+          <li>Verificação mensal dos backups e teste de restauração</li>
+          <li>Atualizações de sistemas, roteadores e antivírus</li>
+          <li>Entrada e saída de funcionários: contas e acessos</li>
+          <li>Suporte remoto e visitas incluídas no pacote</li>
+          <li>Relatório mensal com o que foi feito</li>
+        </ul>
+        <a href="#contato" class="btn btn-primary">Quero esse plano</a>
+      </article>
+      <article class="card plan reveal">
+        <span class="tag">Residências e home office</span>
+        <h3>Rede de casa segura</h3>
+        <p>Para quem trabalha de casa e quer a rede funcionando sem dor de cabeça.</p>
+        <ul class="checks">
+          <li>Wi‑Fi cobrindo a casa toda</li>
+          <li>Rede separada para visitantes e dispositivos</li>
+          <li>Backup das fotos e documentos da família</li>
+          <li>Suporte remoto quando precisar</li>
+        </ul>
+        <a href="#contato" class="btn btn-ghost">Quero esse plano</a>
+      </article>
+      <article class="card plan reveal">
+        <span class="tag">Sistemas e automações</span>
+        <h3>Sustentação de software</h3>
+        <p>Para o site, o sistema ou a automação continuarem rodando e melhorando.</p>
+        <ul class="checks">
+          <li>Monitoramento de disponibilidade e de erros</li>
+          <li>Backup do código e do banco de dados</li>
+          <li>Atualizações de segurança das dependências</li>
+          <li>Banco de horas para ajustes e melhorias</li>
+          <li>Relatório mensal com o que foi feito</li>
+        </ul>
+        <a href="#contato" class="btn btn-ghost">Quero esse plano</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="precos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Preços</span>
+      <h2>Como cobramos</h2>
+      <p>Cada serviço tem um modelo de cobrança claro, combinado antes de começar.</p>
+    </div>
+    <div class="price-list reveal">
+      <div class="price-row"><strong>Diagnóstico de infraestrutura e segurança</strong><span>Projeto fechado, com relatório e plano de ação.</span></div>
+      <div class="price-row"><strong>Implementação</strong><span>Preço por item do plano, aprovado antes de executar.</span></div>
+      <div class="price-row"><strong>Acompanhamento mensal</strong><span>Mensalidade com escopo e horas definidos.</span></div>
+      <div class="price-row"><strong>Redes residenciais</strong><span>Visita técnica + instalação por equipamento ou ponto.</span></div>
+      <div class="price-row"><strong>Sites e sistemas</strong><span>Projeto fechado por escopo, com etapas e entregas combinadas.</span></div>
+      <div class="price-row"><strong>Automações e integrações</strong><span>Preço por fluxo automatizado ou banco de horas.</span></div>
+      <div class="price-row"><strong>Sustentação de software</strong><span>Mensalidade com horas para ajustes e melhorias.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="duvidas">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Minha empresa é pequena. Preciso mesmo me preocupar com segurança?</summary><p>Sim. Pequenas empresas costumam ser alvo justamente por terem menos proteção. O básico bem feito (backup testado, dois fatores e rede separada) já evita a maior parte dos problemas.</p></details>
+      <details><summary>O que vem no diagnóstico?</summary><p>Inventário de equipamentos, mapa da rede, situação dos backups, contas e acessos, e um relatório com os riscos e as correções em ordem de prioridade. Se fizer sentido, apontamos também processos que valem a pena automatizar.</p></details>
+      <details><summary>Sou obrigado a contratar a mensalidade?</summary><p>Não. Você pode contratar só o diagnóstico, só a implementação ou o acompanhamento. O relatório é seu de qualquer jeito.</p></details>
+      <details><summary>Vocês acessam meus arquivos?</summary><p>Só com a sua autorização e quando for necessário para o serviço. Tudo que acessamos fica registrado na ordem de serviço.</p></details>
+      <details><summary>O código e as contas do sistema ficam comigo?</summary><p>Sim. O código, a documentação e as contas de hospedagem e domínio ficam registrados em nome da sua empresa. Se um dia quiser trocar de fornecedor, leva tudo.</p></details>
+      <details><summary>Quanto tempo leva para fazer um site ou sistema?</summary><p>Depende do escopo. Um site institucional costuma levar poucas semanas; sistemas e automações são divididos em etapas curtas, com entregas que você já usa no caminho.</p></details>
+      <details><summary>Vocês consertam computadores e impressoras 3D?</summary><p>Sim, no <a href="../hardware/" data-site="hardware">Nodara Hardware</a>, a nossa área de manutenção de equipamentos: computadores, eletrônica e impressoras 3D, com diagnóstico antes do orçamento.</p></details>
+      <details><summary>Atendem presencialmente?</summary><p>Sim, em Belo Horizonte – MG, com visita técnica. Boa parte do suporte do dia a dia e todo o desenvolvimento também podem ser feitos remotamente.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="contato">
+  <div class="container contact">
+    <div class="reveal">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Contato</span>
+        <h2>Peça seu diagnóstico</h2>
+        <p>Conte como está a sua estrutura hoje, ou o que você quer automatizar, e respondemos com os próximos passos.</p>
+      </div>
+      <div class="contact-info">
+        <div class="info-item"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><strong>Atendimento</strong><span>Belo Horizonte – MG · presencial e remoto</span></div></div>
+        <div class="info-item"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div><div><strong>Resposta por escrito</strong><span>Com o que entendemos, o que sugerimos e quanto custa.</span></div></div>
+        <div class="info-item"><div class="icon-badge hardware"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17h10v4H7z"/></svg></div><div><strong>Equipamento com defeito?</strong><span>Impressoras 3D, computadores e eletrônica: <a href="../hardware/#contato" data-site="hardware" data-hash="#contato" class="to-hardware">peça orçamento no Nodara Hardware →</a></span></div></div>
+      </div>
+    </div>
+    <form class="card reveal" data-pedido="Nodara Support" data-area="Support" novalidate>
+      <div class="field"><label for="nome">Nome</label><input id="nome" name="nome" data-label="Nome" autocomplete="name" required></div>
+      <div class="field"><label for="empresa">Empresa ou bairro <span style="color:var(--muted);font-weight:500">(opcional)</span></label><input id="empresa" name="empresa" data-label="Empresa/bairro" autocomplete="organization"></div>
+      <div class="field"><label for="servico">Serviço</label>
+        <select id="servico" name="servico" data-label="Serviço" required>
+          <option value="">Escolha</option>
+          <option>Diagnóstico de infraestrutura e segurança</option>
+          <option>Rede e Wi‑Fi para empresa</option>
+          <option>Rede residencial</option>
+          <option>Backup e segurança</option>
+          <option>Acompanhamento mensal</option>
+          <option>Site ou página de venda</option>
+          <option>Sistema interno ou painel</option>
+          <option>Automação ou integração</option>
+          <option>Microsoft 365 / Google Workspace</option>
+          <option>IA para o negócio</option>
+        </select>
+      </div>
+      <div class="field"><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" data-label="Mensagem" placeholder="Ex.: escritório com 8 computadores, Wi‑Fi caindo e backup num HD externo."></textarea></div>
+      <button type="submit" class="btn btn-primary">Copiar pedido</button>
+      <p class="form-note">O pedido é montado e copiado para você colar na conversa com a Nodara. Nada é enviado sem você ver.</p>
+      <p class="form-status" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<nodara-footer>
+  <p class="credits">Foto: <a href="https://commons.wikimedia.org/wiki/File:3D_printer_working_on_green_model_parts.jpg" target="_blank" rel="noopener">Shixart1985</a>, CC BY 2.0, via Wikimedia Commons.</p>
+</nodara-footer>
+
+<script>
+// check-up de segurança
+(function(){
+  var boxes = document.querySelectorAll('#checkup input[type=checkbox]');
+  var num = document.getElementById('score-num'), bar = document.getElementById('score-bar');
+  var label = document.getElementById('score-label'), left = document.getElementById('score-left');
+  function update(){
+    var total = boxes.length, ok = 0;
+    boxes.forEach(function(b){ if (b.checked) ok++; });
+    var score = Math.round(ok / total * 100), falta = total - ok;
+    num.textContent = score; bar.style.width = score + '%';
+    if (score === 100) { label.textContent = 'Bem protegido'; label.className = 'pill good'; bar.style.background = 'var(--ok)'; }
+    else if (score >= 50) { label.textContent = 'Atenção'; label.className = 'pill mid'; bar.style.background = '#F59E0B'; }
+    else { label.textContent = 'Risco alto'; label.className = 'pill'; bar.style.background = 'var(--bad)'; }
+    left.textContent = falta === 0 ? 'Nada pendente. Vamos manter assim?' : (falta === 1 ? '1 ponto a resolver' : falta + ' pontos a resolver');
+  }
+  boxes.forEach(function(b){ b.addEventListener('change', update); });
+  update();
+})();
+// terminal: linhas aparecem em sequência
+(function(){
+  var items = document.querySelectorAll('#term li');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(){ items.forEach(function(li,i){ setTimeout(function(){ li.classList.add('on'); }, reduce ? 0 : i * 450); }); }
+  var term = document.getElementById('term');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting) { show(); io.disconnect(); } }, {threshold:.4});
+    io.observe(term);
+  } else show();
+})();
+</script>
+</body>
+</html>
